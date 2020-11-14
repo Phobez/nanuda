@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{kotex}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -36,27 +37,30 @@ ndhartanto1@gmail.com}
 \maketitle
 
 \begin{abstract}
-Users create a "group" composed of either one person (themselves) or several people. Users then invite these people to the group. Users add expenses and split the costs with either all, some, or no members of the group. Users can categorise and add descriptions for each expense. Users can also customise how the costs are split. Users can see a summary of how much they owe to others and how much others owe to others. The summary of how much users owe changes as users spend and pay.
+Users create a "group" composed of either one person (themselves) or several people. Users then invite these people to the group. Users add expenses and split the costs with either all, some, or no members of the group. Users can add descriptions for each expense. Users can also customise how the costs are split. Users can see a summary of how much they owe to others and how much others owe to others. The summary of how much users owe changes as users spend and pay.
 \end{abstract}
 
 \begin{IEEEkeywords}
 expenses, finance, management
 \end{IEEEkeywords}
 
-\begin{center}
-\begin{tabular}{|p{6em}|p{5em}|p{10em}|}
+\begin{table}[htbp]
+\caption{Role Assignments}
+\label{tab:role-assignments}
+\begin{tabular}{|c|c|c|}
 \hline
-\textbf{Role} & \textbf{Name} & \textbf{Task Description etc.} \\
-\hline
-\textbf{User/Customer} & Nadya Hartanto & Tests the application for bugs and issues. Provides feedback to the Development Manager.
-Also provides feedback on UX and UI quality. \\
-\hline
-\textbf{Software Developer} & Abia Putrama Herlianto & Implements software based on design. Fixes bugs and issues. \\
-\hline
-\textbf{Development Manager} & Hugo Ravé & Designs software based on requirements and feedback from User/Customer. Organises, schedules, and manages development. \\
-\hline
+\textbf{Role} & \textbf{Name} & \textbf{Task Description} \\ \hline
+User/Customer &
+  \begin{tabular}[c]{@{}c@{}}Nadya\\ Hartanto\end{tabular} &
+  \begin{tabular}[c]{@{}c@{}}Tests the application for bugs and\\ issues. Provides feedback to the\\ Development Manager. Also provides\\ feedback on UX and UI quality.\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}c@{}}Software\\ Developer\end{tabular} &
+  \begin{tabular}[c]{@{}c@{}}Abia Putrama\\ Herlianto\end{tabular} &
+  \begin{tabular}[c]{@{}c@{}}Implements software based on design.\\ Fixes bugs and issues.\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}c@{}}Development\\ Manager\end{tabular} &
+  Hugo Ravé &
+  \begin{tabular}[c]{@{}c@{}}Designs software based on\\ requirements and feedback from\\ User/Customer. Organises,\\ schedules, and manages development.\end{tabular} \\ \hline
 \end{tabular}
-\end{center}
+\end{table}
 
 \section{Introduction}
 When there are shared expenses in a group, it can be complicated to split the costs and gather the money that each person should pay. The usual solution is to have one or several individuals cover the cost of the entire group, and from there the remaining group members would pay their share to those who covered the cost.
@@ -71,7 +75,7 @@ There are several existing applications that perform a similar function, with di
         \begin{figure}[htbp]
             \centerline{\includegraphics[width=50mm,scale=0.5]{img/logo-tricount.png}}
             \caption{Tricount}
-            \label{fig:my_label}
+            \label{fig:tricount-logo}
         \end{figure}
         \\
         (Data from Google Play Store) \\
@@ -82,7 +86,7 @@ There are several existing applications that perform a similar function, with di
         \begin{figure}[htbp]
             \centerline{\includegraphics[width=50mm,scale=0.5]{img/logo-sesterce.png}}
             \caption{Sesterce}
-            \label{fig:my_label}
+            \label{fig:sesterce-logo}
         \end{figure}
         \\
         (Data from Google Play Store) \\
@@ -94,28 +98,39 @@ There are several existing applications that perform a similar function, with di
 \section{Requirements}
 
 \begin{enumerate}
-    \item \textbf {Loading Screen}: When the user opens the application, the loading screen will be displayed until the application has completed loading all the data from the server.
-    \item \textbf {Groups}: If there are existing groups, their names and brief descriptions will be displayed. If it is the first time the application has been opened, a sample group will be present. The user can add another group by using the add group button. The user can enter an existing group by clicking on it. The user can also modify and delete existing groups by long-pressing the group which will display a "Group Details" pop-up.
-    \begin{enumerate}
-        \item \textbf{Enter Group}: The user can enter an existing group by clicking the group in the list.
-        \item \textbf{Add Group}: Two options will be displayed. The user can join an group or make a new one.
-            \begin{enumerate}
-                \item\textbf {Make New Group}: A "New Group" form will be displayed. The user must input the name of the group, the currency used, and the names of the participants. The user can also optionally write a brief description of the group. The user can copy the link to the group for other participants to join the group.
-                \item\textbf {Join Group}: A "Join Group" form will be displayed. The user must input a valid link of an existing group.
-            \end {enumerate}
-        \item \textbf{Edit Group}: An "Edit Group" form will be displayed. Similar to a "New Group" form, the user can change the name of the group, the currency used, and the number and names of the participants.
-        \item \textbf{Delete Group}: The user can delete the group.
-    \end{enumerate}
-    \item \textbf {Expenses}: If there are existing expenses, the name of the expense, the amount, and the date will be displayed. All participants in the group can see the expenses list and add another expense by clicking the "Add Expense" button. The user can also see the details of an expense by clicking on it.
-    \begin{enumerate}
-        \item\textbf {Add Expense}: An "Add Expense" form will be displayed. The user must input the title, amount, date, category, payer participant, and paid for participants of the expense. Users can split the expense equally automatically by default or edit the amounts manually by percentage or by amount.
-        \item\textbf {Expense Detail}: The details of the expense will be displayed: the title, amount, date, payer participant, and paid for participants. The exact amount each paid for participant owes for this expense is also displayed. Users can also edit this expense by clicking the "Edit" button and delete the expense by clicking the "Delete" button.
+    \item This application should run on the Android operating system.
+    \item This application should be able to run offline.
+    \item \textbf{Loading Screen}
         \begin{enumerate}
-            \item \textbf {Edit Expense}: An "Edit Expense" form will be displayed Similar to a "New Expense" form, the user can edit the title, amount, date, payer participant, and paid for participants.
-            \item \textbf {Delete Expense}: The user can delete the expense.
+            \item The application should load the locally stored groups data.
         \end{enumerate}
-    \end{enumerate}
-    \item \textbf {Balances}: A summary of how much is owed will be displayed. The information on who owes whom how much is also displayed e.g. A owes B 3 dollars, A owes C 7 dollars, C owes B 2 dollars. The total amount of money owed or owed to for each participant is listed e.g. in total, A owes 10 dollars, B is owed 5 dollars, C is owed 5 dollars. C is owed 5 dollars because A owes C 7 dollars, but C owes B 2 dollars.
+    \item \textbf{Groups}
+        \begin{enumerate}
+            \item The application should display existing, joined groups.
+            \item The user should be able to open the groups.
+            \item The user should be able to create new groups and join existing groups.
+            \item The user should be able to join a group using a simple link.
+            \item The user should be able to edit and delete existing, joined groups.
+            \item The user should be able to save changes to and sync with the groups data in the server.
+            \item By default, the application should display a sample group.
+            \item A group should have one or more participants.
+            \item A group should use only one currency out of several options.
+        \end{enumerate}
+    \item \textbf{Expenses}
+        \begin{enumerate}
+            \item The application should display existing expenses in the group.
+            \item The user should be able to open the expenses.
+            \item The user should be able to create new expenses in the group.
+            \item The user should be able to edit and delete existing expenses.
+            \item The user should be able to save changes to and sync with the group expenses data in the server.
+            \item The user should be able to determine who pays and who owes.
+            \item The user should be able to determine how much each participant owes.
+        \end{enumerate}
+    \item \textbf{Balances}
+        \begin{enumerate}
+            \item The application should display how much each participant currently owes or is owed in total.
+            \item If a participant owes to another participant, the application should also show how much they owe only to that other participant.
+        \end{enumerate}
 \end{enumerate}
 
 \section{Development Environment}
@@ -126,7 +141,7 @@ There are several existing applications that perform a similar function, with di
         \begin{figure}[htbp]
             \centerline{\includegraphics[width=50mm,scale=0.5]{img/logo-android.png}}
             \caption{Android}
-            \label{fig:my_label}
+            \label{fig:android-logo}
         \end{figure}
         \newline
         For Nanuda, we have chosen the \textbf{Android} mobile operating system as the platform for several reasons:
@@ -141,7 +156,7 @@ There are several existing applications that perform a similar function, with di
         \begin{figure}[htbp]
             \centerline{\includegraphics[height=25mm,scale=0.5]{img/logo-java.png}}
             \caption{Java}
-            \label{fig:my_label}
+            \label{fig:java-logo}
         \end{figure}
         \newline
         For the development of Nanuda, we use the \textbf{Java} programming language. Java is a class-based, object-oriented programming language and one of the world's most popular and widely used programming languages. We chose to use Java for two reasons:
@@ -212,104 +227,153 @@ There are several existing applications that perform a similar function, with di
         There's only 1 main screen in Sesterce. It shows the group name, the number of members, the number of expenses, how much money was spent, who owes money or is owed money by whom. It also shows the list of all expenses sorted by date. The expenses display is pretty similar to Tricount as well, showing the title, the amount of the expense, who it is paid by and for whom. You can also add expenses. You have to chose who paid (one or multiple persons), the amount paid by each person, then select a title, add a date and choose a category for the expense (accommodation, groceries, transportation, you can even add your own category).  
 \end{enumerate}
 
-\newpage
 \section{Specifications}
-\begin{enumerate}
-    \item \textbf {Loading Screen}
-        \begin{figure}[h!]
-            \centerline{\includegraphics[width=50mm,scale=0.5]{img/pseudocode/pseudocode-loading.png}}
-            \caption{Loading Screen Pseudocode}
-            \label{fig:my_label}
-        \end{figure}
-    \item \textbf {Groups}:
-        \begin{figure}[h!]
-            \centerline{\includegraphics[width=50mm,scale=0.5]{img/pseudocode/pseudocode-groups.png}}
-            \caption{Groups Pseudocode}
-            \label{fig:my_label}
-        \end{figure}
-        \begin{enumerate}
-            \item \textbf{Enter Group}:
-                \begin{figure}[h!]
-                    \centerline{\includegraphics[width=50mm,scale=0.5]{img/pseudocode/pseudocode-enter_group.png}}
-                    \caption{Enter Group Pseudocode}
-                    \label{fig:my_label}
-                \end{figure}
-            \item \textbf {Add Group}:
-                \begin{figure}[h!]
-                    \centerline{\includegraphics[width=50mm,scale=0.5]{img/pseudocode/pseudocode-add_group.png}}
-                    \caption{Add Group Pseudocode}
-                    \label{fig:my_label}
-                \end{figure}
-                \begin{enumerate}
-                    \item\textbf {Make New Group}:
-                        \begin{figure}[h!]
-                            \centerline{\includegraphics[width=50mm,scale=0.5]{img/pseudocode/pseudocode-make_group.png}}
-                            \caption{Make New Group Pseudocode}
-                            \label{fig:my_label}
-                        \end{figure}
-                        \newline \newline \newline \newline \newline \newline \newline \newline
-                        \newline \newline
-                    \item\textbf {Join Group}:
-                        \begin{figure}[h!]
-                            \centerline{\includegraphics[width=50mm,scale=0.5]{img/pseudocode/pseudocode-join_group.png}}
-                            \caption{Join Group Pseudocode}
-                            \label{fig:my_label}
-                        \end{figure}
-                \end{enumerate}
-                \item \textbf{Edit Group}
-                    \begin{figure}[h!]
-                        \centerline{\includegraphics[width=50mm,scale=0.5]{img/pseudocode/pseudocode-edit_group.png}}
-                        \caption{Edit Group Pseudocode}
-                        \label{fig:my_label}
-                    \end{figure}
-                \item \textbf{Delete Group}
-                    \begin{figure}[h!]
-                        \centerline{\includegraphics[width=50mm,scale=0.5]{img/pseudocode/pseudocode-delete_group.png}}
-                        \caption{Delete Group Pseudocode}
-                        \label{fig:my_label}
-                    \end{figure}
-        \end{enumerate}
-    \item \textbf {Expenses}
-        \begin{figure}[h!]
-            \centerline{\includegraphics[width=50mm,scale=0.5]{img/pseudocode/pseudocode-expenses.jpg}}
-            \caption{Expenses Pseudocode}
-            \label{fig:my_label}
-        \end{figure}
-        \newpage
-        \begin{enumerate}
-            \item \textbf{Add Expense}
-                \begin{figure}[h!]
-                    \centerline{\includegraphics[width=50mm,scale=0.5]{img/pseudocode/pseudocode-add_expense.jpg}}
-                    \caption{Add Expense Pseudocode}
-                    \label{fig:my_label}
-                \end{figure}
-            \item \textbf{Expense Detail}
-                \begin{figure}[h!]
-                    \centerline{\includegraphics[width=50mm,scale=0.5]{img/pseudocode/pseudocode-expense.png}}
-                    \caption{Expense Details Pseudocode}
-                    \label{fig:my_label}
-                \end{figure}
-            \item \textbf{Edit Expense}
-                \begin{figure}[h!]
-                    \centerline{\includegraphics[width=50mm,scale=0.5]{img/pseudocode/pseudocode-edit_expense.jpg}}
-                    \caption{Edit Expense Pseudocode}
-                    \label{fig:my_label}
-                \end{figure}
-            \item \textbf{Delete Expense}
-                \begin{figure}[h!]
-                    \centerline{\includegraphics[width=50mm,scale=0.5]{img/pseudocode/pseudocode-delete_expense.jpg}}
-                    \caption{Delete Expense Pseudocode}
-                    \label{fig:my_label}
-                \end{figure}
-                \newline \newline
-        \end{enumerate}
-    \item \textbf{Balances}
-        \newline
-        \begin{figure}[h!]
-            \centerline{\includegraphics[width=50mm,scale=0.5]{img/pseudocode/pseudocode-balances.png}}
-            \caption{Balances Pseudocode}
-            \label{fig:my_label}
-        \end{figure}
+    \begin{enumerate}
+        \item \textbf{Loading Screen}
+            \begin{enumerate}
+                \item The application should load the locally stored groups data.
+                \item If it is the first time the application is opened, the application should create new locally stored groups data. By default, a sample group with sample expenses should be made. After it is created, the new locally stored groups data should be uploaded to the server and added to the database.
+            \end{enumerate}
+        \item \textbf{Groups}
+            \begin{enumerate}
+                \item Groups List
+                    \begin{enumerate}
+                        \item The application should display a list of the existing locally stored groups.
+                        \item For each group, its name and description are displayed.
+                        \item Next to each group, there should be a delete button which if clicked should delete the group from the locally stored groups data.
+                        \item The user should only be part of no more than 5 groups.
+                    \end{enumerate}
+                \item Enter Group
+                    \begin{enumerate}
+                        \item If the user clicks on a group, the application should move to the group's Expenses screen.
+                    \end{enumerate}
+                \item Add Group
+                    \begin{enumerate}
+                        \item If the user clicks the "Add Group" button, the application should display the "Add Group" pop up screen.
+                        \item The application should display the "Make New Group" and "Join Group" buttons.
+                        \item If the user is already part of 5 groups, the application should display an error informing the user that they have reached the maximum number of groups.
+                    \end{enumerate}
+                \item Make New Group
+                    \begin{enumerate}
+                        \item If the user clicks the "Make New Group" button, the application should display the "New Group" pop up screen.
+                        \item The user should input the name of the new group, choose a currency to be used by the expenses in the group, and input the names of the participants of the new group.
+                        \item The user should optionally be able to add a description to the new group.
+                        \item The name of the new group should not be empty and should be no longer than 20 characters.
+                        \item If there is a description, the description of the new group should be no longer than 50 characters.
+                        \item The user should be able to choose one of at least three major currencies for the new group.
+                        \item The user should be able to add participants' names by inputting the name and clicking the "Add" button.
+                        \item The new group should have no more than 20 participants.
+                        \item If the user clicks the "Create New Group" button, the application creates the new group and display a link to share to other users to join the group.
+                        \item If the requirements for the new group have not been met, the "Create New Group" button should not be interactable.
+                        \item If the user clicks the "Back" button, the application should move back to the groups list screen.
+                    \end{enumerate}
+                \item Join Group
+                    \begin{enumerate}
+                        \item If the user clicks the "Join Group" button, the application should display the "Join Group" pop up screen.
+                        \item The user should input the link of the group they wish to join.
+                        \item If the user clicks the "Join" button, the application sends a request to the server to find the group and download its information.
+                        \item If the link has not been input or the link is invalid, the "Join" button should not be interactable.
+                        \item If the user clicks the "Back" button, the application should move back to the groups list screen.
+                    \end{enumerate}
+                \item Sync Groups
+                    \begin{enumerate}
+                        \item If the user clicks the "Sync" button, the application should download the latest groups data from and upload changes to the server.
+                    \end{enumerate}
+            \end{enumerate}
+        \item \textbf{Expenses}
+            \begin{enumerate}
+                \item Back Button
+                    \begin{enumerate}
+                        \item If the user clicks the "Back" button, the application should move back to the groups list screen.
+                    \end{enumerate}
+                \item Balances Button
+                    \begin{enumerate}
+                        \item If the user clicks the "Balances" button, the application should move to the balances screen.
+                    \end{enumerate}
+                \item Edit Group
+                    \begin{enumerate}
+                        \item If the user clicks the "Edit Group" button, the application should display the "Edit Group" pop up screen.
+                        \item The application should display the name, currency used by, and names of the participants of the group.
+                        \item The user should be able to change the name, the description, the currency used by the expenses in the group, and the names of the participants of the group.
+                        \item The name of the group should not be empty and should be no longer than 20 characters.
+                        \item If there is a description, the description of the group should be no longer than 50 characters.
+                        \item The user should be able to choose one of at least three major currencies for the new group.
+                        \item The user should be able to add participants' names by inputting the name and clicking the "Add" button.
+                        \item The group should have no more than 20 participants.
+                        \item If the user clicks the "Save Changes" button, the application updates the group and moves back to the expenses list screen.
+                        \item If the requirements for the group have not been met, the "Save Changes" button should not be interactable.
+                        \item If the user clicks the "Back" button, the application should move back to the expenses list screen.
+                    \end{enumerate}
+                \item Expenses List
+                    \begin{enumerate}
+                        \item The application should display a list of the existing locally stored expenses of the group.
+                        \item For each expense, its name, amount, payer, and date should be displayed.
+                        \item Next to each expense, there should be a delete button which if clicked should delete the expense from the locally stored data.
+                        \item There should be no limit to the number of expenses in a group.
+                    \end{enumerate}
+                \item Enter Expense
+                    \begin{enumerate}
+                        \item If the user clicks on an expense, the application should display the details of the expense.
+                        \item The application should display the name, amount, date, and payer of the expense. It should also display the participants who were paid for by this expense and how much each participant owes. It should also display the "Edit Expense" button.
+                        \item If the user clicks the "Back" button, the application should move back to the expenses list screen.
+                    \end{enumerate}
+                \item Edit Expense
+                    \begin{enumerate}
+                        \item If the user clicks on the "Edit Expense" button, the application should display the "Edit Expense" pop up screen.
+                        \item The application should display the name, amount, and date of the expense and choose the participant who pays and participants who are paid for.
+                        \item The user should be able to change the name, amount, date of the expense, the participant who pays, and the participants who are paid for.
+                        \item The name of the expense should not be empty and should be no longer than 20 characters.
+                        \item The amount of the expense should not be empty.
+                        \item The payer participant should not be empty and the user should choose a participant from the list of participants.
+                        \item The application should display all the participants in the group under the "Paid For" label.
+                        \item Next to each participant, there should be a checkbox so the user can choose whether the participant is paid for or not.
+                        \item There should be a checkbox next to the "Paid For" label to choose all participants in the group.
+                        \item Next to each participant whose checkbox is ticked, there should be the amount that will be owed by the participant. By default, the total amount expended should be divided equally between all paid for participants.
+                        \item The user should optionally be able to change how much each participant will owe in the expense manually.
+                        \item If the user edits how much each participant will owe in the expense manually, the total should be equal to the amount expended by the payer participant.
+                        \item If the user clicks the "Save Changes" button, the application updates the expense and moves back to the expenses list screen.
+                        \item If the requirements for the new expense have not been met, the "Save Changes" button should not be interactable.
+                        \item If the user clicks the "Back" button, the application should move back to the expenses list screen.
+                    \end{enumerate}
+                \item Add Expense
+                    \begin{enumerate}
+                        \item If the user clicks the "Add Expense" button, the application should display the "New Expense" pop up screen.
+                        \item The user should input the name, amount, and date of the expense and choose the participant who pays and the participants who are paid for.
+                        \item The name of the expense should not be empty and should be no longer than 20 characters.
+                        \item The amount of the expense should not be empty.
+                        \item By default, the date of the expense should be the current date.
+                        \item The payer participant should not be empty and the user should choose a participant from the list of participants.
+                        \item The application should display all the participants in the group under the "Paid For" label.
+                        \item Next to each participant, there should be a checkbox so the user can choose whether the participant is paid for or not.
+                        \item There should be a checkbox next to the "Paid For" label to choose all participants in the group.
+                        \item Next to each participant whose checkbox is ticked, there should be the amount that will be owed by the participant. By default, the total amount expended should be divided equally between all paid for participants.
+                        \item The user should optionally be able to input how much each participant will owe in the expense manually.
+                        \item If the user edits how much each participant will owe in the expense manually, the total should be equal to the amount expended by the payer participant.
+                        \item If the user clicks the "Add Expense" button, the application creates the new expense and moves back to the expenses list screen.
+                        \item If the requirements for the new expense have not been met, the "Add Expense" button should not be interactable.
+                        \item If the user clicks the "Back" button, the application should move back to the expenses list screen.
+                    \end{enumerate}
+            \end{enumerate}
+        \item \textbf{Balances}
+            \begin{enumerate}
+                \item Back Button
+                    \begin{enumerate}
+                        \item If the user clicks the "Back" button, the application should move back to the groups list screen.
+                    \end{enumerate}
+                \item Expenses Button
+                    \begin{enumerate}
+                        \item If the user clicks the "Expenses" button, the application should move to the expenses screen.
+                    \end{enumerate}
+                \item Summary
+                    \begin{enumerate}
+                        \item The application should display the name of each participant in the group and how much they owe or are owed to.
+                        \item If in total the participant owes more than they are owed, then the total amount they owe should be displayed with a red background.
+                        \item If in total the participant is owed more than they owe, then the total amount they are owed should be displayed with a green background.
+                    \end{enumerate}
+                \item Balancing Details
+                    \begin{enumerate}
+                        \item The application should display how much each participant owes another participant in separate balances. If A owes B and C, and B owes C, then the application should display how much A owes B, how much A owes C, and how much B owes C in separate balances.
+                    \end{enumerate}
+            \end{enumerate}
     \end{enumerate}
-
 \end{document}
