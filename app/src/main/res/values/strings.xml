@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Nanuda</string>
+    <string-array name="names">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>KRW</item>
+
+    </string-array>
 </resources>
