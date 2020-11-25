@@ -7,6 +7,15 @@
     tools:context=".MainActivity">
 
 
+    <include
+        android:id="@+id/groupToolbar"
+        layout="@layout/grouptoolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="191dp"
+        />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
