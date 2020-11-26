@@ -15,7 +15,7 @@ import android.view.View;
 
 import com.example.nanuda.ui.main.SectionsPagerAdapter;
 
-public class expense_main_display extends AppCompatActivity {
+public class ExpensesListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

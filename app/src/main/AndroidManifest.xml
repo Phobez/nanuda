@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nanuda">
-        <activity android:name=".edit_expense"></activity>
-        <activity android:name=".create_new_expense" />
+        <activity android:name=".EditExpenseActivity"></activity>
+        <activity android:name=".CreateNewExpenseActivity" />
         <activity
-            android:name=".expense_main_display"
+            android:name=".ExpensesListActivity"
             android:label="@string/title_activity_expense_main_display"
             android:theme="@style/Theme.Nanuda.NoActionBar" />
         <activity android:name=".MainActivity">
