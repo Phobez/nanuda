@@ -4,6 +4,11 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="title_activity_create_expense">create_expense</string>
+    <string name="back_button_desc">Back Button</string>
+    <string name="add_expense_button_desc">Add Expense Button</string>
+    <string name="sync_button_label">SYNC</string>
+    <string name="expenses_tab_text">Expenses</string>
+    <string name="balances_tab_text">Balances</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

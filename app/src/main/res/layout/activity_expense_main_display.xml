@@ -20,8 +20,9 @@
                 android:id="@+id/imageView"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                app:layout_gravity="center"
+                android:contentDescription="@string/back_button_desc"
                 app:layout_column="0"
+                app:layout_gravity="center"
                 app:layout_row="0"
                 app:srcCompat="@drawable/abc_vector_test" />
 
@@ -30,10 +31,11 @@
                 android:layout_width="277dp"
                 android:layout_height="wrap_content"
 
-                android:gravity="left"
+                android:gravity="start"
                 android:minHeight="?actionBarSize"
                 android:padding="@dimen/appbar_padding"
                 android:paddingLeft="0dp"
+                android:paddingRight="0dp"
                 android:text="GROUP NAME"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
                 android:textSize="18sp"
@@ -45,10 +47,11 @@
                 android:id="@+id/textView"
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:paddingRight="16dp"
-                android:textSize="16sp"
-                android:text="SYNC"
-                android:textAlignment="textEnd" />
+                android:paddingStart="0dp"
+                android:paddingEnd="16dp"
+                android:text="@string/sync_button_label"
+                android:textAlignment="textEnd"
+                android:textSize="16sp" />
 
         </androidx.gridlayout.widget.GridLayout>
 
@@ -62,19 +65,18 @@
             app:tabIndicatorColor="@color/white">
 
 
-
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/expenses2"
+                android:id="@+id/expenses"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="expenses" />
+                android:text="@string/expenses_tab_text" />
 
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/balances2"
+                android:id="@+id/balances"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="balances" />
+                android:text="@string/balances_tab_text" />
         </com.google.android.material.tabs.TabLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -93,6 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
+        android:contentDescription="@string/add_expense_button_desc"
         android:src="@android:drawable/ic_input_add"
         android:tint="@color/white"
         app:backgroundTint="@color/green" />
