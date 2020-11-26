@@ -4,12 +4,16 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="title_activity_create_expense">create_expense</string>
+    <string name="create_expense_button_text">Create Expense</string>
+    <string name="save_changes_button_text">Save Changes</string>
+    <string name="delete_expense_button_text">Delete Expense</string>
     <string name="back_button_desc">Back Button</string>
     <string name="add_expense_button_desc">Add Expense Button</string>
     <string name="sync_button_label">SYNC</string>
     <string name="expenses_tab_text">Expenses</string>
     <string name="balances_tab_text">Balances</string>
     <string name="add_expense_label">Add Expense</string>
+    <string name="edit_expense_label">Edit Expense</string>
     <string name="name_label">Name</string>
     <string name="amount_label">Amount</string>
     <string name="date_label">Date</string>

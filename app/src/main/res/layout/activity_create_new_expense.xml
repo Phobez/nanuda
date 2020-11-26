@@ -342,7 +342,7 @@
                 android:background="@color/green"
                 android:gravity="center"
                 android:shadowColor="@color/green"
-                android:text="Create expense"
+                android:text="@string/create_expense_button_text"
                 android:textColor="@color/white" />
 
 
