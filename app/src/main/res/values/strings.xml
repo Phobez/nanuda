@@ -9,6 +9,14 @@
     <string name="sync_button_label">SYNC</string>
     <string name="expenses_tab_text">Expenses</string>
     <string name="balances_tab_text">Balances</string>
+    <string name="add_expense_label">Add Expense</string>
+    <string name="name_label">Name</string>
+    <string name="amount_label">Amount</string>
+    <string name="date_label">Date</string>
+    <string name="payer_label">Who Paid</string>
+    <string name="payee_label">Paid For</string>
+    <string name="expense_name_placeholder">Input expense name</string>
+    <string name="expense_amount_placeholder">Input amount</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

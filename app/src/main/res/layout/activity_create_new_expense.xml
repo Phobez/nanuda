@@ -26,23 +26,26 @@
                 android:id="@+id/imageView2"
                 android:layout_width="42dp"
                 android:layout_height="match_parent"
-                android:paddingRight="10dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="0dp"
                 app:layout_column="0"
                 app:layout_gravity="center"
                 app:layout_row="0"
-                app:srcCompat="@drawable/abc_vector_test" />
+                app:srcCompat="@drawable/abc_vector_test"
+                android:contentDescription="@string/back_button_desc" />
 
             <TextView
                 android:id="@+id/title2"
                 android:layout_width="248dp"
                 android:layout_height="wrap_content"
 
-                android:gravity="left"
+                android:gravity="start"
                 android:minHeight="?actionBarSize"
                 android:padding="@dimen/appbar_padding"
-                android:paddingLeft="0dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
 
-                android:text="Add Expense"
+                android:text="@string/add_expense_label"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -67,20 +70,21 @@
                     android:layout_width="110dp"
                     android:layout_height="match_parent"
                     android:background="@color/white"
-                    android:paddingLeft="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:paddingTop="16dp"
-                    android:text="Name"
-                    android:textSize="14dp"
+                    android:text="@string/name_label"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/editTextTextPersonName2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="input expense name"
+                    android:text="@string/expense_name_placeholder"
                     android:textColor="@color/light_grey"
                     android:textSize="14sp"
                     android:textStyle="italic" />
@@ -97,10 +101,11 @@
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:paddingLeft="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="0dp"
                     android:paddingTop="16dp"
-                    android:text="Amount"
-                    android:textSize="14dp"
+                    android:text="@string/amount_label"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -110,7 +115,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="numberDecimal"
-                    android:text="input amount"
+                    android:text="@string/amount_label"
                     android:textColor="@color/light_grey"
                     android:textStyle="italic"
                     android:textSize="14sp"/>
@@ -136,15 +141,16 @@
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:paddingLeft="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="0dp"
                     android:paddingTop="16dp"
-                    android:text="Date"
-                    android:textSize="14dp"
+                    android:text="@string/date_label"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/editTextDate2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
@@ -166,10 +172,11 @@
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:paddingLeft="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="0dp"
                     android:paddingTop="16dp"
-                    android:text="Who Paid"
-                    android:textSize="14dp"
+                    android:text="@string/payer_label"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <Spinner
@@ -194,10 +201,11 @@
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:paddingLeft="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="0dp"
                     android:paddingTop="16dp"
-                    android:text="Paid for"
-                    android:textSize="14dp"
+                    android:text="@string/payee_label"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -205,6 +213,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    <!-- REMOVE LATER -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="8dp"
