@@ -9,7 +9,7 @@
 
     <include
         android:id="@+id/groupToolbar"
-        layout="@layout/grouptoolbar"
+        layout="@layout/group_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

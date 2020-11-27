@@ -39,7 +39,7 @@ public class GroupsListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected( item );
         if (item.getItemId() == R.id.make_group) {
-            Intent intent = new Intent( getApplicationContext(), GroupCreatorActivity.class );
+            Intent intent = new Intent( getApplicationContext(), MakeGroupActivity.class );
             startActivity( intent );
             return true;
         }
@@ -62,7 +62,7 @@ public class GroupsListActivity extends AppCompatActivity {
                 createButton.setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(GroupsListActivity.this, GroupCreatorActivity.class);
+                        Intent intent = new Intent(GroupsListActivity.this, MakeGroupActivity.class);
                         startActivity( intent );
                     }
                 } );
@@ -83,7 +83,7 @@ public class GroupsListActivity extends AppCompatActivity {
         listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
-                Intent intent = new Intent( getApplicationContext(), GroupCreatorActivity.class );
+                Intent intent = new Intent( getApplicationContext(), MakeGroupActivity.class );
                 intent.putExtra( "groupId", i );
                 startActivity( intent );
             }
@@ -115,7 +115,7 @@ public class GroupsListActivity extends AppCompatActivity {
 
     public void joinGroupDialog(){
         dialogBuilder = new AlertDialog.Builder( this );
-        final View joinPopupView = getLayoutInflater().inflate( R.layout.joinpopup, null );
+        final View joinPopupView = getLayoutInflater().inflate( R.layout.join_popup, null );
         link = (EditText)joinPopupView.findViewById( R.id.linkInputPopup );
         joinButtonPopup = (Button) joinPopupView.findViewById( R.id.joinGroupButtonPopup );
         dialogBuilder.setView( joinPopupView );

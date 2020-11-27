@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class GroupCreatorActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class MakeGroupActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 int groupId;
 Button save;
 ArrayList<String>addArray = new ArrayList<String>();
@@ -28,7 +28,7 @@ int participantNmb = 0;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
 
-        setContentView( R.layout.activity_group_creator );
+        setContentView( R.layout.activity_make_group);
         txt = (EditText) findViewById( R.id.ParticipantInput );
         show= (ListView) findViewById( R.id.participantsListView );
         save = (Button) findViewById( R.id.addParticipantButton );
@@ -48,7 +48,7 @@ int participantNmb = 0;
                 }
                 else{
                     addArray.add(getInput);
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(GroupCreatorActivity.this, android.R.layout.simple_list_item_1,addArray  );
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(MakeGroupActivity.this, android.R.layout.simple_list_item_1,addArray  );
                     show.setAdapter( adapter );
                     ((EditText)findViewById( R.id.ParticipantInput )).setText( " " );
 
