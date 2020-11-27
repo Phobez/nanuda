@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nanuda">
         <activity android:name=".GroupCreatorActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".GroupsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

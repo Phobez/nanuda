@@ -1,29 +1,24 @@
 package com.example.nanuda;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class GroupsListActivity extends AppCompatActivity {
     static ArrayList<String> groups = new ArrayList<>();
     static ArrayAdapter arrayAdapter;
     private AlertDialog.Builder dialogBuilder;
@@ -54,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_main );
+        setContentView( R.layout.activity_groups_list);
 
 
 
@@ -62,12 +57,12 @@ public class MainActivity extends AppCompatActivity {
         makeJoinButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog dialog = new AlertDialog.Builder( MainActivity.this ).setMessage( "What do want to do ?" ).setPositiveButton( "Create group", null ).setNegativeButton( "Join group", null ).show();
+                AlertDialog dialog = new AlertDialog.Builder( GroupsListActivity.this ).setMessage( "What do want to do ?" ).setPositiveButton( "Create group", null ).setNegativeButton( "Join group", null ).show();
                 Button createButton = dialog.getButton( AlertDialog.BUTTON_POSITIVE );
                 createButton.setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(MainActivity.this, GroupCreatorActivity.class);
+                        Intent intent = new Intent(GroupsListActivity.this, GroupCreatorActivity.class);
                         startActivity( intent );
                     }
                 } );
@@ -100,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
                 int itemToDelete = i;
 
-                new AlertDialog.Builder( MainActivity.this )
+                new AlertDialog.Builder( GroupsListActivity.this )
                         .setIcon( android.R.drawable.ic_dialog_alert )
                         .setTitle( "Are you sure ? " )
                         .setMessage( "Do you want to delete this group ? " )

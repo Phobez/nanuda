@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
 import java.util.ArrayList;
 
 public class GroupCreatorActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -59,12 +59,12 @@ int participantNmb = 0;
         Intent intent = getIntent();
         groupId= intent.getIntExtra("groupId", -1);
         if(groupId != -1 ){
-            groupName.setText(MainActivity.groups.get(groupId));
+            groupName.setText(GroupsListActivity.groups.get(groupId));
         }
         else{
-            MainActivity.groups.add("");
-            groupId=MainActivity.groups.size() -1;
-            MainActivity.arrayAdapter.notifyDataSetChanged();
+            GroupsListActivity.groups.add("");
+            groupId= GroupsListActivity.groups.size() -1;
+            GroupsListActivity.arrayAdapter.notifyDataSetChanged();
         }
         Spinner mySpinner = findViewById( R.id.spinner1 );
         ArrayAdapter<CharSequence> myAdapter = ArrayAdapter.createFromResource( this,R.array.names, android.R.layout.simple_spinner_item );
@@ -80,8 +80,8 @@ int participantNmb = 0;
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                MainActivity.groups.set(groupId, String.valueOf( s ));
-                MainActivity.arrayAdapter.notifyDataSetChanged();
+                GroupsListActivity.groups.set(groupId, String.valueOf( s ));
+                GroupsListActivity.arrayAdapter.notifyDataSetChanged();
 
             }
 

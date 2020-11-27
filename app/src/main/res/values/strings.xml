@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">Nanuda</string>
+    <string name="groups_label">Groups</string>
+    <string name="new_group_button_text">Make/Join New Group</string>
     <string-array name="names">
         <item>USD</item>
         <item>EUR</item>
         <item>KRW</item>
-
     </string-array>
 </resources>
