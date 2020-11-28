@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Nanuda</string>
+    <string name="groups_label">Groups</string>
+    <string name="new_group_button_text">Make/Join New Group</string>
+    <string name="group_name_placeholder">Group Name</string>
+    <string name="group_name_label">Name :</string>
+    <string name="group_description_label">Description :</string>
+    <string name="group_description_placeholder">Input group description</string>
+    <string name="group_currency_label">Currency :</string>
+    <string name="group_participants_label">Participants :</string>
+    <string name="group_participants_placeholder">Input participant\'s name</string>
+    <string name="add_participant_button_text">+</string>
+    <string name="make_group_button_text">Make Group</string>
+    <string-array name="names">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>KRW</item>
+    </string-array>
 </resources>

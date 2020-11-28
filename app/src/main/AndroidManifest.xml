@@ -14,12 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nanuda">
         <activity android:name=".SplashScreenActivity" android:theme="@style/SplashScreenTheme">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MakeGroupActivity" />
+        <activity android:name=".GroupsListActivity" />
     </application>
 
 </manifest>
