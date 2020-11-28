@@ -3,9 +3,13 @@ package com.example.nanuda;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,9 +20,29 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GroupsListActivity extends AppCompatActivity {
+    private static String GROUPS_FILE_PATH = "groups.txt";
+    private static ArrayList<String> groupIds = new ArrayList<String>();
+
     static ArrayList<String> groups = new ArrayList<>();
     static ArrayAdapter arrayAdapter;
     private AlertDialog.Builder dialogBuilder;
@@ -26,6 +50,8 @@ public class GroupsListActivity extends AppCompatActivity {
     private Button makeJoinButton;
     EditText link;
     Button joinButtonPopup;
+
+    private SharedPreferences prefs = null;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -51,7 +77,8 @@ public class GroupsListActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_groups_list);
 
-
+        // TODO: refactor logic to work with group name AND description
+        setUpGroupIds();
 
         makeJoinButton = (Button) findViewById( R.id.MakeJoin );
         makeJoinButton.setOnClickListener( new View.OnClickListener() {
@@ -77,7 +104,6 @@ public class GroupsListActivity extends AppCompatActivity {
         } );
 
         ListView listView = (ListView) findViewById( R.id.listView );
-        groups.add( "\n\nSample Group" );
         arrayAdapter = new ArrayAdapter( this, android.R.layout.simple_list_item_1, groups );
         listView.setAdapter( arrayAdapter );
         listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
@@ -128,5 +154,89 @@ public class GroupsListActivity extends AppCompatActivity {
                 dialog.dismiss( );
             }
         } );
+    }
+
+    /**
+     * Sets up the Groups ID array list.
+     */
+    private void setUpGroupIds() {
+        prefs = getSharedPreferences(getApplicationContext().getPackageName(), MODE_PRIVATE);
+        Boolean firstRun = false;
+
+        File groupIdsFile = new File(getFilesDir() + "/" + GROUPS_FILE_PATH);
+        if (groupIdsFile.exists()) {
+            groupIds = readGroupIds(this);
+        } else {
+            if (prefs.getBoolean("firstRun", true)) {
+                // TODO: add code to create sample group here INCLUDING in backend
+                groupIds.add("Sample Group");
+            }
+            writeGroupIds(groupIds, this);
+        }
+    }
+
+    /**
+     * Write group IDs to the groups.txt file.
+     * @param groupIds Group IDs as a list of strings.
+     * @param context
+     */
+    private void writeGroupIds(ArrayList<String> groupIds, Context context) {
+        FileOutputStream fos = null;
+
+        try {
+            fos = openFileOutput(GROUPS_FILE_PATH, MODE_PRIVATE);
+
+            StringBuilder data = new StringBuilder();
+
+            for (String s : groupIds) {
+                data.append(s);
+                data.append("\n");
+            }
+
+            fos.write(data.toString().getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /**
+     * Reads group IDs from the groups.txt file.
+     * @param context
+     * @return Group IDs as a list of strings.
+     */
+    private ArrayList<String> readGroupIds(Context context) {
+        ArrayList<String> groupIds = new ArrayList<String>();
+
+        try {
+            InputStream inputStream = context.openFileInput(GROUPS_FILE_PATH);
+
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+
+                while ((receiveString = bufferedReader.readLine()) != null) {
+                    groupIds.add(receiveString);
+                }
+
+                inputStream.close();
+            }
+        } catch (FileNotFoundException e) {
+            Log.e(context.toString(), "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e(context.toString(), "Cannot read file: " + e.toString());
+        }
+
+        return groupIds;
     }
 }
