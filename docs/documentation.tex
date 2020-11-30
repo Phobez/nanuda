@@ -70,31 +70,6 @@ The problem that arises from this is keeping track of these expenses. This is es
 The name Nanuda comes from Korean 나누다, meaning 'to divide (up), to split (up)'. The name was chosen because our own experiences in splitting expenses in Korea was the reason we thought up of the idea.
 
 There are several existing applications that perform a similar function, with different individual features. These include Tricount and Sesterce.
-\begin{enumerate}
-    \item \textbf{Tricount}
-        \begin{figure}[htbp]
-            \centerline{\includegraphics[width=50mm,scale=0.5]{img/logo-tricount.png}}
-            \caption{Tricount}
-            \label{fig:tricount-logo}
-        \end{figure}
-        \\
-        (Data from Google Play Store) \\
-        Rating: 4.8 stars \\
-        Downloads: 1 million+ \\
-        Key features: Users can share a simple link to share their expenses. Members of a group can add expenses and see the balance. Expenses can be shared unevenly. Tricount works both offline and online, with logging in being optional. It also has both a mobile app and a website.
-    \item \textbf{Sesterce}
-        \begin{figure}[htbp]
-            \centerline{\includegraphics[width=50mm,scale=0.5]{img/logo-sesterce.png}}
-            \caption{Sesterce}
-            \label{fig:sesterce-logo}
-        \end{figure}
-        \\
-        (Data from Google Play Store) \\
-        Rating: 4.7 stars \\
-        Downloads: 5,000+ \\
-        Key features: Similar to Tricount, users can join a single group and add expenses, keeping track of all bills and costs. Sesterce is completely anonymous with no login or email required. In addition, Sesterce allows the addition of custom categories for expenses, the option to view statistics, and exporting all the data to a .csv file.
-\end{enumerate}
-
 \section{Requirements}
 
 \begin{enumerate}
@@ -174,7 +149,7 @@ There are several existing applications that perform a similar function, with di
                 \hline
                 Android Studio & Android Development IDE & 0 \\
                 \hline
-                AWS Educate & Backend Server & 0 \\
+                Back4App & Backend Server & 0 \\
                 \hline
                 Overleaf & Online, Collaborative LaTeX Writing Tool & 0 \\
                 \hline
@@ -182,20 +157,24 @@ There are several existing applications that perform a similar function, with di
                 \hline
                 GitHub Desktop & GUI for GitHub & 0 \\
                 \hline
+                MockFlow & UI Planning Platform & 0 \\
+                \hline
             \end{tabular}
         \end{center}
     \item \textbf{Development Environment}
     \begin{itemize}
         \item \textbf{Android Studio Version 4.1} \\
         Android Studio was chosen because it is the official IDE for the Android operating system.
-        \item \textbf{AWS Educate} \\
-        AWS Educate is Amazon's programme for students to use AWS services at no cost.
+        \item \textbf{Back4App} \\
+        Back4App is a low-code backend based on the open-source Parse Platform. Back4App was chosen due to its accessibility and ease of use, allowing anyone to make apps faster without managing infrastructure. It can easily be integrated on any mobile or web app through GraphQL, Rest APIs, or the various Parse SDKs.
         \item \textbf{Overleaf} \\
         Overleaf was chosen because of its popularity and the effectiveness of its features, namely simple, in-browser editing, immediate compilation, easy sharing and collaborative editing.
         \item \textbf{GitHub} \\
         GitHub was chosen for Nanuda's remote repository because of our familiarity with it in comparison to other version control systems.
         \item \textbf{GitHub for Desktop} \\
         GitHub for Desktop was chosen instead of the regular, CLI-based system to interact with GitHub because of its simplicity and intuitiveness.
+        \item \textbf{MockFlow} \\
+        MockFlow is a powerful online UI planning platform. MockFlow was chosen due to its rich pre-made library of components as well as its powerful editor, even in its free package.
     \end{itemize}
 \end{enumerate}
 
@@ -205,26 +184,57 @@ There are several existing applications that perform a similar function, with di
         \begin{figure}[htbp]
             \centerline{\includegraphics[width=50mm,scale=0.5]{img/logo-tricount.png}}
             \caption{Tricount}
-            \label{fig:my_label}
+            \label{fig:tricount-logo}
         \end{figure}
-        \newline
-        Starts by setting up your account, sign up/login through different ways (Facebook, phone number,etc...). Create your group by choosing a name, purpose of the group (trip, group of friends, couple, family) then choose your currency, add the name of the members (up to 30 participants) and finally share the link of the group to the members and you're all set to start keeping up with your expenses. 
-        \newline
-        Inside a group, you have two main pages: Expenses and Balance. Expenses is where you can see all the expenses of the group as well as the name of the group, who is in it, your total personal expenses and the total expenses of the group. An expense is presented on the screen like this: name of the expense, amount, currency, paid by who and date of the expense. You can click on it to see a picture of the object or receipt if it was added, modify the title of the expense, amount, date, paid by, and for who it was paid. You can also delete the expense. You can sort the expenses by different categories, such as amount paid, date of payment, payer and title.
-        \newline
-        The second main screen is Balance which shows who owes money and who is owed money. When you click on the owed money to someone, you can mark the debt as paid or you can invite them to pay you through a link sent via messaging platforms. 
-        \newline
-        You also have the main menu screen of the app which allows you to see all the groups you're a part of and where you can add or delete groups.
+        \begin{itemize}
+            \item \textbf{Rating}: 4.8 stars (48,000 ratings) on Google Play Store
+            \item \textbf{Downloads}: 1 million+ on Google Play Store
+            \item \textbf{Features}:
+                \begin{itemize}
+                    \item Optional log in feature allows all a user's Tricounts to be linked to a user's profile
+                    \item Share simple link so other users can join groups and see expenses
+                    \item Anyone in a group can add their own expenses
+                    \item Splitting expenses unevenly
+                    \item Works offline
+                    \item Works on both the web and mobile (Android, iOS, and Windows Phone)
+                    \item Optional push notifications when someone edits or adds expenses
+                    \item Sort expenses by categories
+                    \item Several other paid features such as statistics
+                \end{itemize}
+            \item \textbf{Differences}:
+                \begin{itemize}
+                    \item Nanuda does not have log in feature to be as lightweight as possible
+                    \item Only mobile app
+                    \item No push notifications
+                    \item No expense categories
+                    \item Does not have some of Tricount's paid features such as statistics
+                \end{itemize}
+        \end{itemize}
     \item\textbf{Sesterce} \\
         \begin{figure}[htbp]
             \centerline{\includegraphics[width=50mm,scale=0.5]{img/logo-sesterce.png}}
             \caption{Sesterce}
             \label{fig:my_label}
         \end{figure}
-        \newline
-        The setup is pretty similar to create a group and add members.
-        \newline
-        There's only 1 main screen in Sesterce. It shows the group name, the number of members, the number of expenses, how much money was spent, who owes money or is owed money by whom. It also shows the list of all expenses sorted by date. The expenses display is pretty similar to Tricount as well, showing the title, the amount of the expense, who it is paid by and for whom. You can also add expenses. You have to chose who paid (one or multiple persons), the amount paid by each person, then select a title, add a date and choose a category for the expense (accommodation, groceries, transportation, you can even add your own category).  
+        \begin{itemize}
+            \item \textbf{Rating}: 4.7 stars (106 reviews) on Google Play Store
+            \item \textbf{Downloads}: 5,000+ on Google Play Store
+            \item \textbf{Features}:
+                \begin{itemize}
+                    \item Splitting expenses unevenly
+                    \item Sort expenses by categories
+                    \item View statistics by category and group member
+                    \item Converting foreign currency
+                    \item Export all data
+                \end{itemize}
+            \item \textbf{Differences}:
+                \begin{itemize}
+                    \item Nanuda does not have expense categories
+                    \item No statistics
+                    \item No conversion between currencies
+                    \item Cannot export data
+                \end{itemize}
+        \end{itemize}
 \end{enumerate}
 
 \section{Specifications}
@@ -240,7 +250,6 @@ There are several existing applications that perform a similar function, with di
                     \begin{enumerate}
                         \item The application should display a list of the existing locally stored groups.
                         \item For each group, its name and description are displayed.
-                        \item Next to each group, there should be a delete button which if clicked should delete the group from the locally stored groups data.
                         \item The user should only be part of no more than 5 groups.
                     \end{enumerate}
                 \item Enter Group
@@ -278,6 +287,11 @@ There are several existing applications that perform a similar function, with di
                 \item Sync Groups
                     \begin{enumerate}
                         \item If the user clicks the "Sync" button, the application should download the latest groups data from and upload changes to the server.
+                    \end{enumerate}
+                \item Delete Groups
+                    \begin{enumerate}
+                        \item If the user long-presses any group, the user should be able to select groups to be deleted.
+                        \item If the user selects groups to be deleted, there should be a "Delete Groups" button to delete the groups.
                     \end{enumerate}
             \end{enumerate}
         \item \textbf{Expenses}
