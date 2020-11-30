@@ -27,12 +27,13 @@ public class Expense extends ParseObject {
 
     /**
      * Constructor with arguments.
-     * @param title     Title of the new expense.
-     * @param amount    Amount of the new expense.
-     * @param date      Date of the new expense.
-     * @param payer     Who pays for the new expense.
-     * @param payees    Who is paid for by the new expense.
-     * @param group     The group the new expense belongs to.
+     * @param title         Title of the new expense.
+     * @param amount        Amount of the new expense.
+     * @param date          Date of the new expense.
+     * @param payer         Who pays for the new expense.
+     * @param payees        Who is paid for by the new expense.
+     * @param owedAmounts   Amount owed per payee.
+     * @param group         The group the new expense belongs to.
      */
     public Expense(String title, Long amount, Date date, String payer, List<String> payees, List<Long> owedAmounts, Group group) {
         setTitle(title);

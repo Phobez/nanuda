@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 
 /**
  * Activity that displays the splash screen during the app's cold start.
@@ -15,7 +16,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+        startActivity(new Intent(SplashScreenActivity.this, GroupsListActivity.class));
         finish();
     }
 }
