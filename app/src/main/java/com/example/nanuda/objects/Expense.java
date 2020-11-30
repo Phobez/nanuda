@@ -17,7 +17,7 @@ public class Expense extends ParseObject {
     public static final String KEY_DATE = "date";
     public static final String KEY_PAYER = "payer";
     public static final String KEY_PAYEES = "payees";
-    public static final String KEY_GROUP = "groupId";
+    public static final String KEY_GROUP = "group";
 
     /**
      * Default constructor.
@@ -26,20 +26,20 @@ public class Expense extends ParseObject {
 
     /**
      * Constructor with arguments.
-     * @param title Title of the new expense.
-     * @param amount Amount of the new expense.
-     * @param date Date of the new expense.
-     * @param payer Who pays for the new expense.
-     * @param payees Who is paid for by the new expense.
-     * @param groupId The ID of the group the new expense belongs to.
+     * @param title     Title of the new expense.
+     * @param amount    Amount of the new expense.
+     * @param date      Date of the new expense.
+     * @param payer     Who pays for the new expense.
+     * @param payees    Who is paid for by the new expense.
+     * @param group     The group the new expense belongs to.
      */
-    public Expense(String title, Long amount, Date date, String payer, List<String> payees, String groupId) {
+    public Expense(String title, Long amount, Date date, String payer, List<String> payees, Group group) {
         setTitle(title);
         setAmount(amount);
         setDate(date);
         setPayer(payer);
         setPayees(payees);
-        setGroupId(groupId);
+        setGroup(group);
     }
 
     // GETTER SETTERS
@@ -63,7 +63,7 @@ public class Expense extends ParseObject {
 
     public void setPayees(List<String> payees) { put(KEY_PAYEES, payees); }
 
-    public String getGroupId() { return getString(KEY_GROUP); }
+    public Group getGroup() { return (Group) getParseObject(KEY_GROUP); }
 
-    public void setGroupId(String groupId) { put(KEY_GROUP, groupId); }
+    public void setGroup(Group group) { put(KEY_GROUP, group); }
 }
