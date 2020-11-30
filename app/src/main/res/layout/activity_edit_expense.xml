@@ -20,7 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -84,7 +85,8 @@
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:text="Lunch"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:autofillHints="input expense name" />
 
             </LinearLayout>
 
