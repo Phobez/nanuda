@@ -13,16 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nanuda">
-        <activity android:name=".ExpenseMain"></activity>
+        <activity android:name=".ExpenseMainDisplayActivity"></activity>
         <activity android:name=".EditExpenseActivity" />
         <activity android:name=".CreateNewExpenseActivity" />
         <activity
-            android:name=".ExpensesListActivity"
-            android:label="@string/title_activity_expense_main_display"
-            android:theme="@style/Theme.Nanuda.NoActionBar" />
-        <activity android:name=".MainActivity">
-        <activity android:name=".SplashScreenActivity" android:theme="@style/SplashScreenTheme">
-        <intent-filter>
+            android:name=".SplashScreenActivity"
+            android:theme="@style/SplashScreenTheme">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

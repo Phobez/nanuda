@@ -45,4 +45,5 @@
         <item>EUR</item>
         <item>KRW</item>
     </string-array>
+    <string name="title_activity_expense_main_display2">ExpenseMainDisplay2</string>
 </resources>
