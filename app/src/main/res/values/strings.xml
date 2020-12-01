@@ -16,4 +16,9 @@
         <item>EUR</item>
         <item>KRW</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settlement_label">Settlement</string>
+    <string name="owes_label">owes</string>
+    <string name="current_balances_label">Current Balances</string>
 </resources>
