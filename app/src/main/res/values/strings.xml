@@ -40,10 +40,38 @@
     <string name="group_participants_placeholder">Input participant\'s name</string>
     <string name="add_participant_button_text">+</string>
     <string name="make_group_button_text">Make Group</string>
+
     <string-array name="names">
         <item>USD</item>
         <item>EUR</item>
         <item>KRW</item>
     </string-array>
+
+    <string-array name="expense_name">
+        <item>Expense Name 1</item>
+        <item>Expense Name 2</item>
+        <item>Expense Name 3</item>
+    </string-array>
+
+    <string-array name="paid_by">
+        <item>Paid by NAME</item>
+        <item>Paid by NAME</item>
+        <item>Paid by NAME</item>
+    </string-array>
+
+    <string-array name="amount">
+        <item>Amount</item>
+        <item>Amount</item>
+        <item>Amount</item>
+    </string-array>
+
+    <string-array name="date_array">
+        <item>11/11/20</item>
+        <item>11/11/20</item>
+        <item>11/11/20</item>
+    </string-array>
+
+
+
     <string name="title_activity_expense_main_display2">ExpenseMainDisplay2</string>
 </resources>
