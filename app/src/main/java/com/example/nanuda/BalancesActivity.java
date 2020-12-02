@@ -26,6 +26,9 @@ public class BalancesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_balances);
 
+        getSupportActionBar().setTitle("Balances");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         recyclerView = (RecyclerView) findViewById(R.id.balancesList);
 
         summaryList.add(new SummaryListObject("Abia", "1000"));
