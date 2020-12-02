@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.nanuda.expense.ExpenseAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ExpenseMainDisplayActivity extends AppCompatActivity {
 
@@ -18,6 +21,9 @@ public class ExpenseMainDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_main_display);
 
+        getSupportActionBar().setTitle("the group name");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         recyclerView = findViewById(R.id.expenses_recycler);
 
         expenseName= getResources().getStringArray(R.array.expense_name);
@@ -28,5 +34,14 @@ public class ExpenseMainDisplayActivity extends AppCompatActivity {
         ExpenseAdapter expenseAdapter = new ExpenseAdapter( this,expenseName, paidBy, amount, date );
         recyclerView.setAdapter(expenseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        FloatingActionButton btn = (FloatingActionButton)findViewById(R.id.addExpenseButton);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ExpenseMainDisplayActivity.this, CreateNewExpenseActivity.class));
+            }
+        });
     }
 }

@@ -21,6 +21,9 @@ public class EditExpenseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_expense);
 
+        getSupportActionBar().setTitle("Edit Expense");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         editExpenseName = findViewById(R.id.editExpenseName);
         editAmount = findViewById(R.id.editAmount);
         editDate = findViewById(R.id.editDate);

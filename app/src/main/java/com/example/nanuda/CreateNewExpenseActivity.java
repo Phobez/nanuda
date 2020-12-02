@@ -18,6 +18,8 @@ public class CreateNewExpenseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_expense);
 
+        getSupportActionBar().setTitle("Add Expense");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 

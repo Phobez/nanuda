@@ -15,10 +15,9 @@
         android:theme="@style/Theme.Nanuda">
         <activity android:name=".ExpenseMainDisplayActivity"></activity>
         <activity android:name=".EditExpenseActivity"
-            android:parentActivityName=".ExpenseMainDisplayActivity"
-            android:label="Edit Group"
-            />
-        <activity android:name=".CreateNewExpenseActivity" />
+            android:parentActivityName=".ExpenseMainDisplayActivity" />
+        <activity android:name=".CreateNewExpenseActivity"
+            android:parentActivityName=".ExpenseMainDisplayActivity" />
         <activity
             android:name=".SplashScreenActivity"
             android:theme="@style/SplashScreenTheme">
