@@ -43,6 +43,7 @@ public class GroupsListActivity extends AppCompatActivity {
     private static String GROUPS_FILE_PATH = "groups.txt";
     private static ArrayList<String> groupIds = new ArrayList<String>();
 
+
     static ArrayList<String> groups = new ArrayList<>();
     static ArrayAdapter arrayAdapter;
     private AlertDialog.Builder dialogBuilder;
@@ -76,6 +77,9 @@ public class GroupsListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_groups_list);
+
+        getSupportActionBar().setTitle( "Groups" );
+        getSupportActionBar().setDisplayHomeAsUpEnabled( true );
 
         // TODO: refactor logic to work with group name AND description
         setUpGroupIds();

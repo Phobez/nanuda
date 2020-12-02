@@ -8,15 +8,6 @@
     android:visibility="visible"
     tools:context=".MakeGroupActivity">
 
-    <include
-        android:id="@+id/makeANewGroupToolbar"
-        layout="@layout/make_new_group_toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="191dp"
-        />
-
     <EditText
         android:id="@+id/groupName"
         android:layout_width="206dp"

@@ -28,6 +28,9 @@ int participantNmb = 0;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
 
+        getSupportActionBar().setTitle( "Make a new group" );
+        getSupportActionBar().setDisplayHomeAsUpEnabled( true );
+
         setContentView( R.layout.activity_make_group);
         txt = (EditText) findViewById( R.id.ParticipantInput );
         show= (ListView) findViewById( R.id.participantsListView );
