@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nanuda">
         <activity android:name=".ExpenseMainDisplayActivity"></activity>
-        <activity android:name=".EditExpenseActivity" />
+        <activity android:name=".EditExpenseActivity"
+            android:parentActivityName=".ExpenseMainDisplayActivity"
+            android:label="Edit Group"
+            />
         <activity android:name=".CreateNewExpenseActivity" />
         <activity
             android:name=".SplashScreenActivity"

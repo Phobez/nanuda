@@ -78,7 +78,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName2"
+                    android:id="@+id/editExpenseName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -108,7 +108,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextNumberDecimal"
+                    android:id="@+id/editAmount"
                     android:layout_width="229dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -147,7 +147,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextDate2"
+                    android:id="@+id/editDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -176,7 +176,7 @@
                     android:textStyle="bold" />
 
                 <Spinner
-                    android:id="@+id/spinner1"
+                    android:id="@+id/spinnerWhoPaidEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/btn_dropdown"

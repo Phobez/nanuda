@@ -66,7 +66,7 @@ int participantNmb = 0;
             groupId= GroupsListActivity.groups.size() -1;
             GroupsListActivity.arrayAdapter.notifyDataSetChanged();
         }
-        Spinner mySpinner = findViewById( R.id.spinner1 );
+        Spinner mySpinner = findViewById( R.id.spinnerWhoPaidNew);
         ArrayAdapter<CharSequence> myAdapter = ArrayAdapter.createFromResource( this,R.array.names, android.R.layout.simple_spinner_item );
         myAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
         mySpinner.setAdapter( myAdapter );
