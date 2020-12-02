@@ -17,6 +17,7 @@ public class Expense extends ParseObject {
     public static final String KEY_DATE = "date";
     public static final String KEY_PAYER = "payer";
     public static final String KEY_PAYEES = "payees";
+    public static final String KEY_OWED_AMOUNTS = "owedAmounts";
     public static final String KEY_GROUP = "group";
 
     /**
@@ -26,19 +27,21 @@ public class Expense extends ParseObject {
 
     /**
      * Constructor with arguments.
-     * @param title     Title of the new expense.
-     * @param amount    Amount of the new expense.
-     * @param date      Date of the new expense.
-     * @param payer     Who pays for the new expense.
-     * @param payees    Who is paid for by the new expense.
-     * @param group     The group the new expense belongs to.
+     * @param title         Title of the new expense.
+     * @param amount        Amount of the new expense.
+     * @param date          Date of the new expense.
+     * @param payer         Who pays for the new expense.
+     * @param payees        Who is paid for by the new expense.
+     * @param owedAmounts   Amount owed per payee.
+     * @param group         The group the new expense belongs to.
      */
-    public Expense(String title, Long amount, Date date, String payer, List<String> payees, Group group) {
+    public Expense(String title, Long amount, Date date, String payer, List<String> payees, List<Long> owedAmounts, Group group) {
         setTitle(title);
         setAmount(amount);
         setDate(date);
         setPayer(payer);
         setPayees(payees);
+        setOwedAmounts(owedAmounts);
         setGroup(group);
     }
 
@@ -62,6 +65,10 @@ public class Expense extends ParseObject {
     public List<String> getPayees() { return getList(KEY_PAYEES); }
 
     public void setPayees(List<String> payees) { put(KEY_PAYEES, payees); }
+
+    public List<Long> getOwedAmounts() { return getList(KEY_OWED_AMOUNTS); }
+
+    public void setOwedAmounts(List<Long> owedAmounts) { put(KEY_OWED_AMOUNTS, owedAmounts); }
 
     public Group getGroup() { return (Group) getParseObject(KEY_GROUP); }
 
