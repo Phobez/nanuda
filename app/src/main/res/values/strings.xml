@@ -11,6 +11,8 @@
     <string name="group_participants_placeholder">Input participant\'s name</string>
     <string name="add_participant_button_text">+</string>
     <string name="make_group_button_text">Make Group</string>
+    <string name="expenses_tab_text">Expenses</string>
+    <string name="balances_tab_text">Balances</string>
     <string-array name="names">
         <item>USD</item>
         <item>EUR</item>

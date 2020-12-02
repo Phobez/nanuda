@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.example.nanuda.objects.DetailsListObject;
 import com.example.nanuda.objects.SummaryListObject;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,10 @@ public class BalancesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_balances);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.balancesTabLayout);
+        TabLayout.Tab balancesTab = tabLayout.getTabAt(1);
+        balancesTab.select();
 
         getSupportActionBar().setTitle("Balances");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
