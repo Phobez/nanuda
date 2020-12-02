@@ -1,57 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
-
+    android:gravity="center"
+    tools:context="com.example.nanuda.ExpenseMainDisplayActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/green"
-        android:theme="@style/Theme.Nanuda.AppBarOverlay">
-
-        <androidx.gridlayout.widget.GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:contentDescription="@string/back_button_desc"
-                app:layout_column="0"
-                app:layout_gravity="center"
-                app:layout_row="0"
-                app:srcCompat="@drawable/abc_vector_test" />
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="277dp"
-                android:layout_height="wrap_content"
-
-                android:gravity="start"
-                android:minHeight="?actionBarSize"
-                android:padding="@dimen/appbar_padding"
-                android:paddingLeft="0dp"
-                android:paddingRight="0dp"
-                android:text="GROUP NAME"
-                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_column="1"
-                app:layout_row="0" />
-
-            <Button
-                android:id="@+id/sync_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/green"
-                android:text="@string/sync_button_label" />
-
-        </androidx.gridlayout.widget.GridLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
@@ -77,23 +31,22 @@
                 android:text="@string/balances_tab_text" />
         </com.google.android.material.tabs.TabLayout>
 
-    </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/expenses_recycler"
         android:layout_width="match_parent"
-        android:layout_height="636dp"
-        android:translationY="108dp">
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabs">
 
     </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:src="@android:drawable/ic_input_add"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp" />
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@android:drawable/ic_input_add" />
 
-    "
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>
