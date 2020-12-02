@@ -13,14 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nanuda">
-        <activity android:name=".SplashScreenActivity" android:theme="@style/SplashScreenTheme">
-        <intent-filter>
+        <activity android:name=".EditGroupActivity" android:parentActivityName=".GroupsListActivity"></activity>
+        <activity
+            android:name=".SplashScreenActivity"
+            android:theme="@style/SplashScreenTheme">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MakeGroupActivity" android:parentActivityName=".GroupsListActivity"/>
+        <activity
+            android:name=".MakeGroupActivity"
+            android:parentActivityName=".GroupsListActivity" />
         <activity android:name=".GroupsListActivity" />
     </application>
 
