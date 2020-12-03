@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nanuda.objects.DetailsListObject;
@@ -14,6 +15,9 @@ import com.example.nanuda.objects.SummaryListObject;
 
 import java.util.ArrayList;
 
+/**
+ * Adapts balances data to RecyclerView format.
+ */
 public class BalancesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int SUMMARY_LIST_HEADER_VIEW = 1;
     private static final int SUMMARY_LIST_ITEM_VIEW = 2;
@@ -65,7 +69,7 @@ public class BalancesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             final String owerName = detailsList.get(pos).getOwerName();
             final String oweeName = detailsList.get(pos).getOweeName();
-            final String owedAmount = detailsList.get(pos).getOwedAmount();
+            final String owedAmount = detailsList.get(pos).getOwedAmountAsString();
 
             this.owerName.setText(owerName);
             this.oweeName.setText(oweeName);
@@ -76,10 +80,14 @@ public class BalancesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             pos = pos - 1;
 
             final String participantName = summaryList.get(pos).getParticipantName();
-            final String participantSum = summaryList.get(pos).getParticipantSum();
+            final String participantSum = summaryList.get(pos).getParticipantSumAsString();
 
             this.participantName.setText(participantName);
             this.participantSum.setText(participantSum);
+
+            if (summaryList.get(pos).getParticipantSum() < 0) {
+                this.participantSum.setTextColor(ContextCompat.getColor(this.participantSum.getContext(), android.R.color.holo_red_dark));
+            }
         }
     }
 
