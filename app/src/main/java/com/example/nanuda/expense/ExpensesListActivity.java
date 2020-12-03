@@ -9,8 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.nanuda.R;
+import com.example.nanuda.SplashScreenActivity;
+import com.example.nanuda.objects.Expense;
 import com.example.nanuda.objects.Group;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExpensesListActivity extends AppCompatActivity {
 
@@ -24,11 +30,35 @@ public class ExpensesListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        // TODO: replace with static final string
+        // TODO: replace extra name with static final string
         Group group = intent.getParcelableExtra("com.example.nanuda.GROUP");
+        ArrayList<Expense> expenses = new ArrayList<Expense>();
 
         getSupportActionBar().setTitle(group.getName());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.expensesTabLayout);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+                    case 1:
+                        // TODO: replace SplashScreenActivity.class with BalancesActivity.class
+                        Intent intent = new Intent(ExpensesListActivity.this, SplashScreenActivity.class);
+                        // TODO: replace extra names with static final strings
+                        intent.putExtra("com.example.nanuda.GROUP", group);
+                        intent.putParcelableArrayListExtra("com.example.nanuda.EXPENSES", expenses);
+
+                        startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) { }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) { }
+        });
 
         recyclerView = findViewById(R.id.expenses_recycler);
 
