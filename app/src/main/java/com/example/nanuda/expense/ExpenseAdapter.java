@@ -12,18 +12,21 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nanuda.R;
+import com.example.nanuda.objects.Expense;
+import com.example.nanuda.objects.Group;
+
+import java.util.ArrayList;
 
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder> {
 
-    String expenseName[], paidBy[], amount[], date[];
+    ArrayList<Expense> expenses;
+    Group group;
+    //String expenseName[], paidBy[], amount[], date[];
     Context context;
 
-    public ExpenseAdapter(Context ct, String expenseName[], String paidBy[], String amount[], String date[]){
+    public ExpenseAdapter(Context ct, ArrayList<Expense> expenses, Group group ){
         context = ct;
-        this.expenseName = expenseName;
-        this.paidBy = paidBy;
-        this.amount = amount;
-        this.date = date;
+        this.expenses = expenses;
     }
     @NonNull
     @Override
@@ -35,19 +38,18 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
 
     @Override
     public void onBindViewHolder(@NonNull ExpenseViewHolder holder, int position) {
-        holder.expenseText.setText(expenseName[position]);
-        holder.paidByText.setText(paidBy[position]);
-        holder.amountText.setText(amount[position]);
-        holder.dateText.setText(date[position]);
+        holder.expenseText.setText(expenses.get(position).getTitle());
+        holder.paidByText.setText(expenses.get(position).getPayer());
+        // TODO: change to use getAmountAsString()
+        holder.amountText.setText((expenses.get(position).getAmount()).toString());
+        holder.dateText.setText(expenses.get(position).getDate().toString());
 
         holder.expenseListLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, EditExpenseActivity.class);
-                intent.putExtra("expenseName",expenseName[position] );
-                intent.putExtra("paidBy",paidBy[position] );
-                intent.putExtra("amount",amount[position] );
-                intent.putExtra("date",date[position] );
+                intent.putExtra("com.example.nanuda.GROUP", group);
+                intent.putExtra("com.example.nanuda.EXPENSE", expenses.get(position));
                 context.startActivity(intent);
             }
         });
@@ -56,7 +58,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
 
     @Override
     public int getItemCount() {
-        return expenseName.length;
+        return expenses.size();
     }
 
     public class ExpenseViewHolder extends RecyclerView.ViewHolder{

@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nanuda">
-        <activity android:name=".expense.ExpensesListActivity"></activity>
+        <activity android:name=".expense.ExpensesListActivity" android:parentActivityName=".SplashScreenActivity"/>
         <activity android:name=".expense.EditExpenseActivity"
             android:parentActivityName=".expense.ExpensesListActivity" />
         <activity android:name=".expense.MakeExpenseActivity"

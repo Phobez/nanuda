@@ -22,7 +22,7 @@ public class ExpensesListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
-    String expenseName[], paidBy[], amount[], date[];
+    ArrayList<Expense> expenses;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +32,7 @@ public class ExpensesListActivity extends AppCompatActivity {
 
         // TODO: replace extra name with static final string
         Group group = intent.getParcelableExtra("com.example.nanuda.GROUP");
-        ArrayList<Expense> expenses = new ArrayList<Expense>();
+        ArrayList<Expense> expenses = intent.getParcelableArrayListExtra("com.example.nanuda.EXPENSES");
 
         getSupportActionBar().setTitle(group.getName());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -62,12 +62,12 @@ public class ExpensesListActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.expenses_recycler);
 
-        expenseName= getResources().getStringArray(R.array.expense_name);
+        /**expenseName= getResources().getStringArray(R.array.expense_name);
         paidBy = getResources().getStringArray(R.array.paid_by);
         amount = getResources().getStringArray(R.array.amount);
-        date = getResources().getStringArray(R.array.date_array);
+        date = getResources().getStringArray(R.array.date_array);*/
 
-        ExpenseAdapter expenseAdapter = new ExpenseAdapter( this,expenseName, paidBy, amount, date );
+        ExpenseAdapter expenseAdapter = new ExpenseAdapter( this,expenses,group);
         recyclerView.setAdapter(expenseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
