@@ -65,7 +65,7 @@ public class Group extends ParseObject {
 
     public Currency getCurrency() { return Currency.valueOf(getString(KEY_CURRENCY)); }
 
-    public void setCurrency(Currency currency) { put(KEY_DESC, currency.toString()); }
+    public void setCurrency(Currency currency) { put(KEY_CURRENCY, currency.toString()); }
 
     public List<String> getParticipants() { return getList(KEY_PARTICIPANTS); }
 
