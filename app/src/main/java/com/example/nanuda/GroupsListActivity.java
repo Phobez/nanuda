@@ -127,8 +127,8 @@ public class GroupsListActivity extends AppCompatActivity {
 
                 new AlertDialog.Builder( GroupsListActivity.this )
                         .setIcon( android.R.drawable.ic_dialog_alert )
-                        .setTitle( "Are you sure ? " )
-                        .setMessage( "Do you want to delete this group ? " )
+                        .setTitle( "Are you sure?" )
+                        .setMessage( "Do you want to delete this group?" )
                         .setPositiveButton( "Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
