@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Nanuda</string>
+    <string name="app_name_lowercase">nanuda</string>
+    <string name="app_name_korean">나누다</string>
+    <string name="app_sub_label">split expenses</string>
     <string name="groups_label">Groups</string>
     <string name="new_group_button_text">Make/Join New Group</string>
     <string name="group_name_placeholder">Group Name</string>
