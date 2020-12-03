@@ -1,4 +1,4 @@
-package com.example.nanuda;
+package com.example.nanuda.expense;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import com.example.nanuda.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

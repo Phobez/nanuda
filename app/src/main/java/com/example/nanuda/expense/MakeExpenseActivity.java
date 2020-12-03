@@ -1,4 +1,4 @@
-package com.example.nanuda;
+package com.example.nanuda.expense;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,16 +7,18 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.nanuda.R;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class CreateNewExpenseActivity extends AppCompatActivity {
+public class MakeExpenseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_new_expense);
+        setContentView(R.layout.activity_make_expense);
 
         getSupportActionBar().setTitle("Add Expense");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

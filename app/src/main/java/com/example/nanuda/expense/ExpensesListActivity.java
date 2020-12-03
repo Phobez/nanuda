@@ -1,4 +1,4 @@
-package com.example.nanuda;
+package com.example.nanuda.expense;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,10 +8,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.nanuda.expense.ExpenseAdapter;
+import com.example.nanuda.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class ExpenseMainDisplayActivity extends AppCompatActivity {
+public class ExpensesListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
@@ -19,7 +19,7 @@ public class ExpenseMainDisplayActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_expense_main_display);
+        setContentView(R.layout.activity_expenses_lists);
 
         getSupportActionBar().setTitle("the group name");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -40,7 +40,7 @@ public class ExpenseMainDisplayActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ExpenseMainDisplayActivity.this, CreateNewExpenseActivity.class));
+                startActivity(new Intent(ExpensesListActivity.this, MakeExpenseActivity.class));
             }
         });
     }
