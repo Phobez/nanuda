@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.nanuda.R;
+import com.example.nanuda.objects.Group;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ExpensesListActivity extends AppCompatActivity {
@@ -21,7 +22,12 @@ public class ExpensesListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses_lists);
 
-        getSupportActionBar().setTitle("the group name");
+        Intent intent = getIntent();
+
+        // TODO: replace with static final string
+        Group group = intent.getParcelableExtra("com.example.nanuda.GROUP");
+
+        getSupportActionBar().setTitle(group.getName());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView = findViewById(R.id.expenses_recycler);

@@ -8,7 +8,7 @@
     android:layout_height="match_parent">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
+            android:id="@+id/expensesTabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/green"
@@ -18,14 +18,14 @@
 
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/expenses"
+                android:id="@+id/expensesExpensesTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/expenses_tab_text" />
 
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/balances"
+                android:id="@+id/expensesBalancesTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/balances_tab_text" />
@@ -35,7 +35,7 @@
         android:id="@+id/expenses_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tabs">
+        android:layout_below="@id/expensesTabLayout">
 
     </androidx.recyclerview.widget.RecyclerView>
 
