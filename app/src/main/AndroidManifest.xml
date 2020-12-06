@@ -24,7 +24,7 @@
         </activity>
         <activity android:name=".MakeGroupActivity" />
         <activity android:name=".GroupsListActivity" />
-        <activity android:name=".BalancesActivity" android:parentActivityName=".SplashScreenActivity" />
+        <activity android:name=".balances.BalancesActivity" android:parentActivityName=".SplashScreenActivity" />
     </application>
 
 </manifest>

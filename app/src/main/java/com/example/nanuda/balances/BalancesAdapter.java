@@ -1,4 +1,4 @@
-package com.example.nanuda;
+package com.example.nanuda.balances;
 
 import android.telecom.Call;
 import android.util.Log;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nanuda.R;
 import com.example.nanuda.objects.DetailsListObject;
 import com.example.nanuda.objects.SummaryListObject;
 

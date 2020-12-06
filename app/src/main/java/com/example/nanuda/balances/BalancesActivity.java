@@ -1,13 +1,16 @@
-package com.example.nanuda;
+package com.example.nanuda.balances;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-
+import com.example.nanuda.Nanuda;
+import com.example.nanuda.R;
+import com.example.nanuda.SplashScreenActivity;
 import com.example.nanuda.objects.DetailsListObject;
 import com.example.nanuda.objects.Expense;
 import com.example.nanuda.objects.Group;
@@ -16,9 +19,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Dictionary;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -26,6 +27,8 @@ import java.util.List;
  */
 public class BalancesActivity extends AppCompatActivity {
 
+    private Group group;
+    private ArrayList<Expense> expenses;
     private ArrayList<SummaryListObject> summaryList = new ArrayList<SummaryListObject>();
     private ArrayList<DetailsListObject> detailsList = new ArrayList<DetailsListObject>();
 
@@ -34,26 +37,22 @@ public class BalancesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_balances);
 
+        Intent intent = getIntent();
+        group = intent.getParcelableExtra(Nanuda.EXTRA_GROUP);
+        expenses = intent.getParcelableArrayListExtra(Nanuda.EXTRA_EXPENSES);
+
         // select Balances tab by default
         TabLayout tabLayout = (TabLayout) findViewById(R.id.balancesTabLayout);
         TabLayout.Tab balancesTab = tabLayout.getTabAt(1);
         balancesTab.select();
 
-        Intent intent = getIntent();
-        // TODO: replace name of extras with static final strings
-        Group group = intent.getParcelableExtra("com.example.nanuda.GROUP");
-        ArrayList<Expense> expenses = intent.getParcelableArrayListExtra("com.example.nanuda.EXPENSES");
-
+        // add On Tab Selected Listener to "Expenses" tab
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 0:
-                        // TODO: replace SplashScreenActivity.class with the expenses list activity
-                        Intent intent = new Intent(BalancesActivity.this, SplashScreenActivity.class);
-                        // TODO: replace name of extras with static final strings
-                        intent.putExtra("com.example.nanuda.GROUP", group);
-                        intent.putParcelableArrayListExtra("com.example.nanuda.EXPENSES", expenses);
+                        Intent intent = setUpBackIntent(true);
                         startActivity(intent);
                         break;
                 }
@@ -74,7 +73,7 @@ public class BalancesActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.balancesList);
 
-        // DUMMY DATA
+        // TEST DATA
         // TODO: REMOVE
         /*
         summaryList.add(new SummaryListObject("Abia", (long) 1000));
@@ -190,5 +189,52 @@ public class BalancesActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    /**
+     * Sets up the intent to go back to the parent activity.
+     * @return  Set up intent.
+     */
+    private Intent setUpBackIntent() {
+        return setUpBackIntent(false);
+    }
+
+    /**
+     * Sets up the intent to go back to the parent activity.
+     * @param toParentActivity  True if intent has to specify target activity, otherwise false.
+     * @return                  Set up intent.
+     */
+    private Intent setUpBackIntent(boolean toParentActivity) {
+        Intent intent;
+        if (toParentActivity) {
+            // TODO: replace SplashScreenActivity.class with ExpensesListActivity.class
+            intent = new Intent(this, SplashScreenActivity.class);
+        } else {
+            intent = new Intent();
+        }
+
+        intent.putExtra(Nanuda.EXTRA_GROUP, group);
+        intent.putParcelableArrayListExtra(Nanuda.EXTRA_EXPENSES, expenses);
+
+        return intent;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = setUpBackIntent();
+            setResult(RESULT_OK, intent);
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = setUpBackIntent();
+        setResult(RESULT_OK, intent);
+        finish();
+        super.onBackPressed();
     }
 }

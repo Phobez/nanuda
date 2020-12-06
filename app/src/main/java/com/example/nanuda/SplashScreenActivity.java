@@ -4,14 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 
-import com.example.nanuda.objects.Expense;
-import com.example.nanuda.objects.Group;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import com.example.nanuda.balances.BalancesActivity;
 
 /**
  * Activity that displays the splash screen during the app's cold start.
@@ -23,9 +17,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        // DUMMY DATA
-        // TODO: remove
         /*
+        // TEST DATA
+        // TODO: remove
         Intent tempIntent = new Intent(SplashScreenActivity.this, BalancesActivity.class);
 
         List<String> participants = new ArrayList<String>();
@@ -63,10 +57,33 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         tempIntent.putParcelableArrayListExtra("com.example.nanuda.EXPENSES", expenses);
 
-        startActivity(tempIntent);
+        int requestCode = 100;
+
+        startActivityForResult(tempIntent, requestCode);
         */
+
         // TODO: replace BalancesActivity.class with GroupsListActivity.class
         startActivity(new Intent(SplashScreenActivity.this, BalancesActivity.class));
         finish();
     }
+
+    // TEST METHOD
+    // TODO: remove
+    /*
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        Log.i("TEST", "RequestCode:" + requestCode);
+        Log.i("TEST", "ResultCode:" + resultCode );
+        if (requestCode == 100) {
+            switch (resultCode) {
+                case RESULT_OK:
+                    Log.i("TEST", "Message: " + ((Group) data.getParcelableExtra("com.example.nanuda.GROUP")).getName());
+                    ArrayList<Expense> expenses =  data.getParcelableArrayListExtra("com.example.nanuda.EXPENSES");
+                    Log.i("TEST", "Message: " + expenses.get(0).getTitle());
+                    break;
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    */
 }
