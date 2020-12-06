@@ -18,7 +18,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         /*
-        // TEST DATA
+        // TEST BALANCES DATA
         // TODO: remove
         Intent tempIntent = new Intent(SplashScreenActivity.this, BalancesActivity.class);
 
