@@ -62,12 +62,11 @@ public class SplashScreenActivity extends AppCompatActivity {
         startActivityForResult(tempIntent, requestCode);
         */
 
-        // TODO: replace BalancesActivity.class with GroupsListActivity.class
-        startActivity(new Intent(SplashScreenActivity.this, BalancesActivity.class));
+        startActivity(new Intent(SplashScreenActivity.this, GroupsListActivity.class));
         finish();
     }
 
-    // TEST METHOD
+    // TEST BALANCES METHOD
     // TODO: remove
     /*
     @Override
