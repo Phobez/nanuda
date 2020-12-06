@@ -6,6 +6,7 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{kotex}
+\usepackage{float}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -37,7 +38,7 @@ ndhartanto1@gmail.com}
 \maketitle
 
 \begin{abstract}
-Users create a "group" composed of either one person (themselves) or several people. Users then invite these people to the group. Users add expenses and split the costs with either all, some, or no members of the group. Users can add descriptions for each expense. Users can also customise how the costs are split. Users can see a summary of how much they owe to others and how much others owe to others. The summary of how much users owe changes as users spend and pay.
+Users create a "group" composed of several people. Users then invite these people to the group. Users add expenses and split the costs with either all, some, or no members of the group. Users can add descriptions for each expense. Users can also customise how the costs are split. Users can see a summary of how much they owe to others and how much others owe to others. The summary of how much users owe changes as users spend and pay.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -74,18 +75,13 @@ There are several existing applications that perform a similar function, with di
 
 \begin{enumerate}
     \item This application should run on the Android operating system.
-    \item This application should be able to run offline.
-    \item \textbf{Loading Screen}
-        \begin{enumerate}
-            \item The application should load the locally stored groups data.
-        \end{enumerate}
     \item \textbf{Groups}
         \begin{enumerate}
             \item The application should display existing, joined groups.
             \item The user should be able to open the groups.
             \item The user should be able to create new groups and join existing groups.
             \item The user should be able to join a group using a simple link.
-            \item The user should be able to edit and delete existing, joined groups.
+            \item The user should be able to edit and delete existing joined groups.
             \item The user should be able to save changes to and sync with the groups data in the server.
             \item By default, the application should display a sample group.
             \item A group should have one or more participants.
@@ -104,7 +100,7 @@ There are several existing applications that perform a similar function, with di
     \item \textbf{Balances}
         \begin{enumerate}
             \item The application should display how much each participant currently owes or is owed in total.
-            \item If a participant owes to another participant, the application should also show how much they owe only to that other participant.
+            \item If participants owe to each other, the application should show how to settle the owed amounts.
         \end{enumerate}
 \end{enumerate}
 
@@ -143,6 +139,10 @@ There are several existing applications that perform a similar function, with di
         \newline
         For the development of Nanuda, all of the resources used are either free of charge or have both free and paid options. For the resources with free and paid options, we have decided to use the free option. As such, the development of Nanuda requires no cost.
         \begin{center}
+            \begin{table}[H]
+            \centering
+            \caption{Cost Estimation}
+            \label{tab:cost-estimation}
             \begin{tabular}{|p{6em}|p{10em}|p{4em}|}
                 \hline
                 \textbf{Resource} & \textbf{Role Description} & \textbf{Cost} \\
@@ -160,20 +160,59 @@ There are several existing applications that perform a similar function, with di
                 MockFlow & UI Planning Platform & 0 \\
                 \hline
             \end{tabular}
-        \end{center}
-    \item \textbf{Development Environment}
+            \end{table}
+        \end{center} 
+        
+    \item \textbf{Development Environment} 
     \begin{itemize}
-        \item \textbf{Android Studio Version 4.1} \\
+        \item \textbf{Android Studio Version 4.1} 
+        \begin{figure}[htbp]
+            \centerline{\includegraphics[width=50mm,scale=0.5]{img/logo/logo-android-studio.png}}
+            \caption{Android Studio}
+            \label{fig:androids-studio-logo}
+        \end{figure}
+        \newline
         Android Studio was chosen because it is the official IDE for the Android operating system.
-        \item \textbf{Back4App} \\
+        \newline
+        \item \textbf{Back4App} 
+        \begin{figure}[htbp]
+            \centerline{\includegraphics[width=50mm,scale=0.5]{img/logo/logo-Back4app.png}}
+            \caption{Back4App}
+            \label{fig:back4app-logo}
+        \end{figure}
+        \newline
         Back4App is a low-code backend based on the open-source Parse Platform. Back4App was chosen due to its accessibility and ease of use, allowing anyone to make apps faster without managing infrastructure. It can easily be integrated on any mobile or web app through GraphQL, Rest APIs, or the various Parse SDKs.
-        \item \textbf{Overleaf} \\
+        \newline
+        \item \textbf{Overleaf} 
+        \begin{figure}[H]
+            \centerline{\includegraphics[width=50mm,scale=0.5]{img/logo/logo-overleaf.png}}
+            \caption{Overleaf}
+            \label{overleaf-logo}
+        \end{figure}
         Overleaf was chosen because of its popularity and the effectiveness of its features, namely simple, in-browser editing, immediate compilation, easy sharing and collaborative editing.
-        \item \textbf{GitHub} \\
+        \newline
+        \item \textbf{GitHub} 
+        \begin{figure}[H]
+            \centerline{\includegraphics[width=50mm,scale=0.5]{img/logo/logo-github.png}}
+            \caption{GitHub}
+            \label{github-logo}
+        \end{figure}
         GitHub was chosen for Nanuda's remote repository because of our familiarity with it in comparison to other version control systems.
-        \item \textbf{GitHub for Desktop} \\
+        \newline
+        \item \textbf{GitHub for Desktop}
+        \begin{figure}[H]
+            \centerline{\includegraphics[width=50mm,scale=0.5]{img/logo/logo-githubdesktop.png}}
+            \caption{GitHub for Desktop}
+            \label{githubdesktop-logo}
+        \end{figure}
         GitHub for Desktop was chosen instead of the regular, CLI-based system to interact with GitHub because of its simplicity and intuitiveness.
-        \item \textbf{MockFlow} \\
+        \newline
+        \item \textbf{MockFlow} 
+        \begin{figure}[H]
+            \centerline{\includegraphics[width=50mm,scale=0.5]{img/logo/logo-mockflow.jpg}}
+            \caption{MockFlow}
+            \label{mockflow-logo}
+        \end{figure}
         MockFlow is a powerful online UI planning platform. MockFlow was chosen due to its rich pre-made library of components as well as its powerful editor, even in its free package.
     \end{itemize}
 \end{enumerate}
@@ -237,18 +276,54 @@ There are several existing applications that perform a similar function, with di
         \end{itemize}
 \end{enumerate}
 
+\subsection{Task distribution}
+\begin{table}[htbp]
+\centering
+\caption{Task Distribution}
+\label{tab:task-distribution}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Name}  & \textbf{Task}                    \\ \hline
+Abia Putrama Herlianto & \begin{tabular}[c]{@{}l@{}}Balances Frontend, Backend,\\ Documentation\end{tabular} \\ \hline
+Hugo Ravé      & Groups Frontend, Documentation   \\ \hline
+Nadya Hartanto & Expenses Frontend, Documentation \\ \hline
+\end{tabular}
+\end{table}
+
 \section{Specifications}
     \begin{enumerate}
-        \item \textbf{Loading Screen}
-            \begin{enumerate}
-                \item The application should load the locally stored groups data.
-                \item If it is the first time the application is opened, the application should create new locally stored groups data. By default, a sample group with sample expenses should be made. After it is created, the new locally stored groups data should be uploaded to the server and added to the database.
-            \end{enumerate}
         \item \textbf{Groups}
+            \begin{figure}[H]
+                \centerline{\includegraphics[scale=0.5]{img/ui/group-main.jpg}}
+                \caption{Groups List Screen}
+                \label{fig:groups-list-screen}
+            \end{figure}
+            \begin{figure}[H]
+                \centerline{\includegraphics[scale=0.5]{img/ui/group-make-or-join.jpg}}
+                \caption{Make New Group Screen}
+                \label{fig:make-new-group-screen}
+            \end{figure}
+            \begin{figure}[H]
+                \centerline{\includegraphics[scale=0.5]{img/ui/group-join.jpg}}
+                \caption{Join Group Screen}
+                \label{fig:join-group-screen}
+            \end{figure}
+            \begin{figure}[H]
+                \centerline{\includegraphics[scale=0.5]{img/ui/group-make.jpg}}
+                \caption{Make Group Screen}
+                \label{fig:make-group-screen}
+            \end{figure}
+            \begin{figure}[H]
+                \centerline{\includegraphics[scale=0.6]{img/ui/group-edit.png}}
+                \caption{Edit Group Screen}
+                \label{fig:edit-group-screen}
+            \end{figure}
             \begin{enumerate}
                 \item Groups List
                     \begin{enumerate}
-                        \item The application should display a list of the existing locally stored groups.
+                        \item The application should load the locally stored group ID data.
+                        \item If it is the first time the application is opened, the application should create new locally stored group ID data. By default, a sample group with sample expenses should be made. After it is created, the new sample group should be uploaded to the server and added to the database.
+                        \item The application should display a list of the existing groups.
                         \item For each group, its name and description are displayed.
                         \item The user should only be part of no more than 5 groups.
                     \end{enumerate}
@@ -284,26 +359,6 @@ There are several existing applications that perform a similar function, with di
                         \item If the link has not been input or the link is invalid, the "Join" button should not be interactable.
                         \item If the user clicks the "Back" button, the application should move back to the groups list screen.
                     \end{enumerate}
-                \item Sync Groups
-                    \begin{enumerate}
-                        \item If the user clicks the "Sync" button, the application should download the latest groups data from and upload changes to the server.
-                    \end{enumerate}
-                \item Delete Groups
-                    \begin{enumerate}
-                        \item If the user long-presses any group, the user should be able to select groups to be deleted.
-                        \item If the user selects groups to be deleted, there should be a "Delete Groups" button to delete the groups.
-                    \end{enumerate}
-            \end{enumerate}
-        \item \textbf{Expenses}
-            \begin{enumerate}
-                \item Back Button
-                    \begin{enumerate}
-                        \item If the user clicks the "Back" button, the application should move back to the groups list screen.
-                    \end{enumerate}
-                \item Balances Button
-                    \begin{enumerate}
-                        \item If the user clicks the "Balances" button, the application should move to the balances screen.
-                    \end{enumerate}
                 \item Edit Group
                     \begin{enumerate}
                         \item If the user clicks the "Edit Group" button, the application should display the "Edit Group" pop up screen.
@@ -318,11 +373,45 @@ There are several existing applications that perform a similar function, with di
                         \item If the requirements for the group have not been met, the "Save Changes" button should not be interactable.
                         \item If the user clicks the "Back" button, the application should move back to the expenses list screen.
                     \end{enumerate}
+                \item Sync Groups
+                    \begin{enumerate}
+                        \item If the user clicks the "Sync" button, the application should download the latest groups data from the server.
+                    \end{enumerate}
+                \item Delete Groups
+                    \begin{enumerate}
+                        \item If the user long-presses any group, the user should be able to select groups to be deleted.
+                        \item If the user selects groups to be deleted, there should be a "Delete Groups" button to delete the groups.
+                    \end{enumerate}
+            \end{enumerate}
+        \item \textbf{Expenses}
+            \begin{figure}[H]
+                \centerline{\includegraphics[scale=0.5]{img/ui/expenses-main.jpg}}
+                \caption{Expenses Main Screen}
+                \label{fig:expenses-main-screen}
+            \end{figure}
+            \begin{figure}[H]
+                \centerline{\includegraphics[scale=0.5]{img/ui/expenses-create.jpg}}
+                \caption{Add Expense Screen}
+                \label{fig:add-expense-screen}
+            \end{figure}
+            \begin{figure}[H]
+                \centerline{\includegraphics[scale=0.5]{img/ui/expenses-create.jpg}}
+                \caption{Edit Expense Screen}
+                \label{fig:edit-expense-screen}
+            \end{figure}
+            \begin{enumerate}
+                \item Back Button
+                    \begin{enumerate}
+                        \item If the user clicks the "Back" button, the application should move back to the groups list screen.
+                    \end{enumerate}
+                \item Balances Button
+                    \begin{enumerate}
+                        \item If the user clicks the "Balances" button, the application should move to the balances screen.
+                    \end{enumerate}
                 \item Expenses List
                     \begin{enumerate}
-                        \item The application should display a list of the existing locally stored expenses of the group.
+                        \item The application should display a list of the existing expenses of the group.
                         \item For each expense, its name, amount, payer, and date should be displayed.
-                        \item Next to each expense, there should be a delete button which if clicked should delete the expense from the locally stored data.
                         \item There should be no limit to the number of expenses in a group.
                     \end{enumerate}
                 \item Enter Expense
@@ -369,10 +458,15 @@ There are several existing applications that perform a similar function, with di
                     \end{enumerate}
                 \item Sync Expenses
                     \begin{enumerate}
-                        \item If the user clicks the "Sync" button, the application should download the latest group expenses data from and upload changes to the server.
+                        \item If the user clicks the "Sync" button, the application should download the latest group expenses data from the server.
                     \end{enumerate}
             \end{enumerate}
         \item \textbf{Balances}
+            \begin{figure}[htbp]
+                \centerline{\includegraphics[scale=0.5]{img/ui/balances.jpg}}
+                \caption{Balances Screen}
+                \label{fig:balances-screen}
+            \end{figure}
             \begin{enumerate}
                 \item Back Button
                     \begin{enumerate}
@@ -390,8 +484,159 @@ There are several existing applications that perform a similar function, with di
                     \end{enumerate}
                 \item Balancing Details
                     \begin{enumerate}
-                        \item The application should display how much each participant owes another participant in separate balances. If A owes B and C, and B owes C, then the application should display how much A owes B, how much A owes C, and how much B owes C in separate balances.
+                        \item The application should display how much each participant owes another participant in separate balances.
                     \end{enumerate}
             \end{enumerate}
     \end{enumerate}
+
+\section{Architecture Design and Implementation}
+\subsection{Overall architecture}
+    \begin{figure}[H]
+        \centerline{\includegraphics[scale=0.35]{img/overall_architecture.png}}
+        \caption{Overall Architecture}
+        \label{fig:overall-architecture}
+    \end{figure}
+
+The Nanuda Android application is divided into four separate modules.
+
+The first part is the "Application" module which is responsible for setting up and starting the application. The "Application" module does this by initialising the application, splash screen, and everything required to connect to the backend. Nanuda uses the low-code back4app open source Backend as a Service provider for its backend, which means Nanuda does not have a separate backend module. Instead, the "Application" module is responsible for connecting and allowing itself as well as other modules to connect to the backend.
+
+The second part is the "Groups" module which is responsible for displaying, adding, joining, editing, and deleting groups. It interacts with the backend to get, add, edit, and remove group data.
+
+The third part is the "Expenses" module which is responsible for displaying, adding, editing, and deleting expenses. It interacts with the backend to get, add, edit, and remove expense data.
+
+The fourth part is the "Balances" module which is responsible for calculating and displaying the summaries of how much each user owes or is owed in total and how users can settle them.
+
+These four modules interact with each other as well as the backend in order for the application to function.
+
+\subsection{Directory organization}
+The organisation of Nanuda's directories follows the organisation of an Android Studio project. Generally, the organisation of the Java packages in the Android Studio project closely follows the overall architecture which splits the application into four modules. In addition, there is a separate directory for files related to the documentation of the project.
+
+\begin{table}[H]
+\centering
+\caption{Directory Organization}
+\label{tab:directory-organization-1}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Directory} &
+  \textbf{File Name} &
+  \textbf{\begin{tabular}[c]{@{}l@{}}Module \\ Name\end{tabular}} \\ \hline
+\begin{tabular}[c]{@{}l@{}}\textbackslash{}app\textbackslash{}src\textbackslash{}main\\ \textbackslash{}java\textbackslash{}com\\ \textbackslash{}teammoney\\ \textbackslash{}nanuda\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Nanuda.java\\ SplashScreenActivity.java\end{tabular} &
+  Application \\ \hline
+\begin{tabular}[c]{@{}l@{}}\textbackslash{}app\textbackslash{}src\textbackslash{}main\\ \textbackslash{}java\textbackslash{}com\\ \textbackslash{}teammoney\\ \textbackslash{}nanuda\textbackslash{}objects\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Expense.java\\ Group.java\end{tabular} &
+  Application \\ \hline
+\begin{tabular}[c]{@{}l@{}}\textbackslash{}app\textbackslash{}src\textbackslash{}main\\ \textbackslash{}java\textbackslash{}com\\ \textbackslash{}teammoney\\ \textbackslash{}nanuda\textbackslash{}expense\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}ExpensesListActivity.java\\ ExpenseAdapter.java\\ MakeExpenseActivity.java\\ EditExpenseActivity.java\end{tabular} &
+  Expenses \\ \hline
+\begin{tabular}[c]{@{}l@{}}\textbackslash{}app\textbackslash{}src\textbackslash{}main\\ \textbackslash{}java\textbackslash{}com\\ \textbackslash{}teammoney\\ \textbackslash{}nanuda\textbackslash{}group\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}GroupsListActivity.java\\ MakeGroupActivity.java\\ EditGroupActivity.java\end{tabular} &
+  Groups \\ \hline
+\begin{tabular}[c]{@{}l@{}}\textbackslash{}app\textbackslash{}src\textbackslash{}main\\ \textbackslash{}java\textbackslash{}com\\ \textbackslash{}teammoney\\ \textbackslash{}nanuda\textbackslash{}balances\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}BalancesActivity.java\\ BalancesAdapter.java\end{tabular} &
+  Balances \\ \hline
+\textbackslash{}docs &
+  \begin{tabular}[c]{@{}l@{}}documentation.pdf\\ documentation.tex\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Documen\\ -tation\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}\textbackslash{}app\textbackslash{}src\textbackslash{}main\\ \textbackslash{}res\textbackslash{}drawable\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}ic\_baseline\_arrow\_back\_ios\_24.xml\\ ic\_launcher\_background.xml\\ splash\_screen\_background.xml\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Application\\ Groups\\ Expenses\\ Balances\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}\textbackslash{}app\textbackslash{}src\textbackslash{}main\\ \textbackslash{}res\textbackslash{}layout\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}activity\_edit\_expense.xml\\ activity\_edit\_group.xml\\ activity\_expenses\_lists.xml\\ activity\_groups\_list.xml\\ activity\_make\_expense.xml\\ activity\_make\_group.xml\\ activity\_splash\_screen.xml\\ expenses\_list\_item.xml\\ group\_toolbar.xml\\ join\_popup.xml\\ make\_new\_group\_toolbar.xml\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Application\\ Groups\\ Expenses\\ Balances\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}\textbackslash{}app\textbackslash{}src\textbackslash{}main\\ \textbackslash{}res\textbackslash{}menu\end{tabular} &
+  join\_group\_menu.xml &
+  Groups \\ \hline
+\begin{tabular}[c]{@{}l@{}}\textbackslash{}app\textbackslash{}src\textbackslash{}main\\ \textbackslash{}res\textbackslash{}values\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}colors.xml\\ dimens.xml\\ ids.xml\\ strings.xml\\ themes.xml\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Application\\ Groups\\ Expenses\\ Balances\end{tabular} \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Module 1: Application}
+    \begin{figure}[H]
+        \centerline{\includegraphics[scale=0.3]{img/flowcharts/flowchart-module-application.png}}
+        \caption{Application Module Flowchart}
+        \label{fig:application-module-flowchart}
+    \end{figure}
+\begin{itemize}
+    \item Purpose \\ The Application module is responsible for initialising the app and its connection with the backend as well as defining information required by the app to function properly.
+    \item Functionality \\ It starts the app, connects it with the backend, and defines the Parse Objects to be used by the Android Parse SDK by the application.
+    \item Location of Source Code
+        \begin{itemize}
+            \item nanuda\textbackslash{}app\textbackslash{}src\textbackslash{}main\textbackslash{}java\textbackslash{}com\textbackslash{}teammoney\textbackslash{}nanuda
+            \item nanuda\textbackslash{}app\textbackslash{}src\textbackslash{}main\textbackslash{}java\textbackslash{}com\textbackslash{}teammoney\textbackslash{}nanuda\textbackslash{} objects
+        \end{itemize}
+    \item Class Components
+        \begin{itemize}
+            \item Nanuda.java \\ Registers the Parse Object subclasses "Group" and "Expense" as required by the SDK and initialises the Parse SDK with the app's application ID, client key, and connects it to the backend at back4app.
+            \item SplashScreenActivity.java \\ Sends an intent from the Splash Screen to the Groups List to start the Groups List Activity.
+            \item Group.java \\ Defines the Group Parse Object subclass as the local Android implementation of the Group table in the backend.
+            \item Expense.java \\ Defines the Expense Parse Object subclass as the local Android implementation of the Expense table in the backend.
+        \end{itemize}
+    \item Where It's Taken From \\ We developed the module ourselves using resources from Back4App and Parse Platform's documentation at https://www.back4app.com/docs and https://docs.parseplatform.org/android/guide respectively.
+    \item How/Why We Use It \\ The Groups module was made because it is one of the three main features of Nanuda. To make it into its own module with its own functionalities and required data is intuitive and makes the development simpler.
+\end{itemize}
+
+\subsection{Module 2: Groups}
+    \begin{figure}[H]
+        \centerline{\includegraphics[scale=0.4]{img/flowcharts/flowchart-module-groups.png}}
+        \caption{Groups Module}
+        \label{fig:groups-module-flowchart}
+    \end{figure}
+\begin{itemize}
+    \item Purpose \\ The Groups module is responsible for displaying, making, joining, editing, and deleting groups.
+    \item Functionality \\ It gets a list of groups the user has joined from the locally-stored file groups.txt and sends a query to the backend to get the groups' data. It displays all these groups. It  also allows the user to make a new group and join, edit, and delete existing groups.
+    \item Location of Source Code \\ nanuda\textbackslash{}app\textbackslash{}src\textbackslash{}main\textbackslash{}java\textbackslash{}com\textbackslash{}teammoney\textbackslash{}nanuda\textbackslash{}group
+    \item Class Components
+        \begin{itemize}
+            \item GroupsListActivity.java \\ Reads the group IDs of the groups the user has joined from the locally-stored groups.txt file and sends a query to the backend to get the groups' data. Using the group data, it creates a Recycler View with each group as a list item. For each list item, it sets up an OnClickListener so that if a user clicks a group, it will send an intent to the Expenses List to start the Expenses List activity. It also sets up the the "Make/Join Group" button, the "Make/Join Group" popup, and the "Join Group" popup. Also sets up the functionality for group list items so that when they are long-pressed, they show a delete option.
+            \item MakeGroupActivity.java \\ Sets up the make group form and sends a request to the backend to create a group using the provided information.
+            \item EditGroupActivity.java \\ Sets up the edit group form with the group's existing data and sends a request to the backend to edit the group using the provided information.
+        \end{itemize}
+    \item Where It's Taken From \\ We developed the module ourselves using resources from Back4App and Parse Platform's documentation at https://www.back4app.com/docs and https://docs.parseplatform.org/android/guide respectively.
+    \item How/Why We Use It \\ The Expenses module was made because it is one of the three main features of Nanuda. To make it into its own module with its own functionalities and required data is intuitive and makes the development simpler.
+\end{itemize}
+
+\subsection{Module 3: Expenses}
+    \begin{figure}[H]
+        \centerline{\includegraphics[scale=0.3]{img/flowcharts/flowchart-module-expenses.png}}
+        \caption{Expenses Module}
+        \label{fig:expenses-module-flowchart}
+    \end{figure}
+\begin{itemize}
+    \item Purpose \\ The Expenses module is responsible for displaying, making, editing, and deleting expenses.
+    \item Functionality \\ It receives the Group data, queries for all the expenses associated with that group, and displays them. It also allows the user to add new expenses and edit and delete existing ones.
+    \item Location of Source Code \\ nanuda\textbackslash{}app\textbackslash{}src\textbackslash{}main\textbackslash{}java\textbackslash{}com\textbackslash{}teammoney\textbackslash{}nanuda\textbackslash{}expense
+    \item Class Components
+        \begin{itemize}
+            \item ExpensesListActivity.java \\ Sets the "Expenses" tab as the selected tab, adds an OnTabSelectedListener to the "Balances" tab so that when the user selects it it will send an intent to the Balances and start the Balances Activity, gets the group data and queries the backend for all expenses associated with that group and passes that data to the Expenses Adapter to make it into a Recycler View.
+            \item ExpensesAdapter.java \\ Adapts the expenses list provided by ExpensesListActivity.java into Recycler View form.
+            \item MakeExpenseActivity.java \\ Sets up the make expense form and sends a request to the backend to create an expense using the provided information.
+            \item EditExpenseActivity.java \\ Sets up the edit expenses form with the expense's existing data and sends a request to the backend to edit the expense using the provided information.
+        \end{itemize}
+\end{itemize}
+
+\subsection{Module 4: Balances}
+    \begin{figure}[H]
+        \centerline{\includegraphics[scale=0.5]{img/flowcharts/flowchart-module-balances.png}}
+        \caption{Balances Module}
+        \label{fig:balances-module-flowchart}
+    \end{figure}
+\begin{itemize}
+    \item Purpose \\ The Balances module is responsible for calculating and displaying the summary of how much each user owes or is owed and how to settle them.
+    \item Functionality \\ It receives the Group and Expenses data, counts the summary for each user, calculates how participants in debt should pay the other participants that are indebted to.
+    \item Location of Source Code \\ nanuda\textbackslash{}app\textbackslash{}src\textbackslash{}main\textbackslash{}java\textbackslash{}com\textbackslash{}teammoney\textbackslash{}nanuda\textbackslash{}balances
+    \item Class Components
+        \begin{itemize}
+            \item BalancesActivity.java \\ Sets the "Balances" tab as the selected tab, adds an OnTabSelectedListener to the "Expenses" tab so that when the user selects it it will send an intent to the Expenses List and start the Expenses List Activity, calculates the total of how much each user owes or is owed, how to settle them, and passes that data to the Recycler View adapter. To calculate the total of how much each user owes or is owed, the algorithm goes through each Expense and adds it to or subtracts it from the payer's total. To calculate how to settle it, the algorithm sorts the users who owe and the users who are owed to in descending order separately. Then starting from the user who is owed the most, 
+            the algorithm goes through the users who owe and has them pay the amount owed. It continues this until the entire amount owed is accounted for.
+            \item BalancesAdapter.java \\
+            Adapts the summary list and details list provided by BalancesActivity.java into Recycler View form. In order to optimise the code, both lists as well as their headers are part of a single long RecyclerView. First, the header of the summary list is entered into the Recycler View, followed by the summary list items, the header of the details list, and finally the details list items.
+        \end{itemize}
+    \item Where It's Taken From \\ We developed the module ourselves using resources from Back4App and Parse Platform's documentation at https://www.back4app.com/docs and https://docs.parseplatform.org/android/guide respectively.
+    \item How/Why We Use It \\ The Balances module was made because it is one of the three main features of Nanuda. To make it into its own module with its own functionalities and required data is intuitive and makes the development simpler.
+\end{itemize}
+
 \end{document}
