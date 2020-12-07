@@ -15,16 +15,16 @@ import com.example.nanuda.R;
 import com.example.nanuda.objects.Expense;
 import com.example.nanuda.objects.Group;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder> {
+public class ExpensesListAdapter extends RecyclerView.Adapter<ExpensesListAdapter.ExpenseViewHolder> {
 
-    ArrayList<Expense> expenses;
+    List<Expense> expenses;
     Group group;
     //String expenseName[], paidBy[], amount[], date[];
     Context context;
 
-    public ExpenseAdapter(Context ct, ArrayList<Expense> expenses, Group group ){
+    public ExpensesListAdapter(Context ct, List<Expense> expenses, Group group ){
         context = ct;
         this.expenses = expenses;
     }
@@ -50,7 +50,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
                 Intent intent = new Intent(context, EditExpenseActivity.class);
                 intent.putExtra("com.example.nanuda.GROUP", group);
                 intent.putExtra("com.example.nanuda.EXPENSE", expenses.get(position));
-                context.startActivity(intent);
+                ((ExpensesListActivity)context).startActivityForResult(intent, 1);
             }
         });
 

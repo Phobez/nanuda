@@ -1,55 +1,67 @@
 package com.example.nanuda.expense;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-
+import com.example.nanuda.Nanuda;
 import com.example.nanuda.R;
-import com.example.nanuda.SplashScreenActivity;
+import com.example.nanuda.balances.BalancesActivity;
 import com.example.nanuda.objects.Expense;
 import com.example.nanuda.objects.Group;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExpensesListActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
+    public static final int MAKE_EXPENSE_REQUEST_CODE = 200;
+    public static final int EDIT_EXPENSE_REQUEST_CODE = 201;
+    public static final int BALANCES_REQUEST_CODE = 202;
 
-    ArrayList<Expense> expenses;
+    private Group group = null;
+    private ArrayList<Expense> expenses = null;
+    private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses_lists);
 
-        Intent intent = getIntent();
+        setUpActivity(getIntent());
+    }
 
-        // TODO: replace extra name with static final string
-        Group group = intent.getParcelableExtra("com.example.nanuda.GROUP");
-        ArrayList<Expense> expenses = intent.getParcelableArrayListExtra("com.example.nanuda.EXPENSES");
+    /**
+     * Sets up the expenses list activity.
+     * @param intent    Intent received.
+     */
+    private void setUpActivity(Intent intent) {
+        group = intent.getParcelableExtra(Nanuda.EXTRA_GROUP);
 
+        // set up action bar
         getSupportActionBar().setTitle(group.getName());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // set up On Tab Selected Listener on the "Balances" tab to go to Balances Activity
         TabLayout tabLayout = (TabLayout) findViewById(R.id.expensesTabLayout);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 1:
-                        // TODO: replace SplashScreenActivity.class with BalancesActivity.class
-                        Intent intent = new Intent(ExpensesListActivity.this, SplashScreenActivity.class);
-                        // TODO: replace extra names with static final strings
-                        intent.putExtra("com.example.nanuda.GROUP", group);
-                        intent.putParcelableArrayListExtra("com.example.nanuda.EXPENSES", expenses);
-
-                        startActivity(intent);
+                        Intent intent = setUpNextIntent(BalancesActivity.class);
+                        startActivityForResult(intent, BALANCES_REQUEST_CODE);
                 }
             }
 
@@ -60,24 +72,108 @@ public class ExpensesListActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) { }
         });
 
-        recyclerView = findViewById(R.id.expenses_recycler);
-
-        /**expenseName= getResources().getStringArray(R.array.expense_name);
-        paidBy = getResources().getStringArray(R.array.paid_by);
-        amount = getResources().getStringArray(R.array.amount);
-        date = getResources().getStringArray(R.array.date_array);*/
-
-        ExpenseAdapter expenseAdapter = new ExpenseAdapter( this,expenses,group);
-        recyclerView.setAdapter(expenseAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        // set up On Click Listener on the Add Expense floating action button to go to Make Expense Activity
         FloatingActionButton btn = (FloatingActionButton)findViewById(R.id.addExpenseButton);
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ExpensesListActivity.this, MakeExpenseActivity.class));
+                Intent intent = setUpNextIntent(MakeExpenseActivity.class);
+                startActivityForResult(intent, MAKE_EXPENSE_REQUEST_CODE);
             }
         });
+
+        setUpExpensesList();
+    }
+
+    /**
+     * Sets up the expenses list.
+     */
+    private void setUpExpensesList() {
+        ParseQuery<Expense> query = ParseQuery.getQuery("Expense");
+        query.whereEqualTo("group", group);
+        query.findInBackground(new FindCallback<Expense>() {
+            public void done(List<Expense> expensesList, ParseException e) {
+                if (e == null) {
+                    expenses = (ArrayList<Expense>) expensesList;
+                    setUpRecyclerView();
+                } else {
+                    Log.d("Expenses List", "Error: " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    /**
+     * Sets up the expenses list recycler view.
+     */
+    private void setUpRecyclerView() {
+        // set up recycler view
+        recyclerView = findViewById(R.id.expenses_recycler);
+
+        ExpensesListAdapter expenseAdapter = new ExpensesListAdapter( this, expenses, group);
+        recyclerView.setAdapter(expenseAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    /**
+     * Sets up the intent to go back to the parent activity.
+     * @return  Set up intent.
+     */
+    private Intent setUpBackIntent() {
+        return setUpBackIntent(false);
+    }
+
+    /**
+     * Sets up the intent to go back to the parent activity.
+     * @param toParentActivity  True if intent has to specify target activity, otherwise false.
+     * @return                  Set up intent.
+     */
+    private Intent setUpBackIntent(boolean toParentActivity) {
+        Intent intent;
+        if (toParentActivity) {
+            intent = new Intent(this, BalancesActivity.class);
+        } else {
+            intent = new Intent();
+        }
+
+        intent.putExtra(Nanuda.EXTRA_GROUP, group);
+
+        return intent;
+    }
+
+    /**
+     * Sets up the intent to go to a following activity.
+     * @param targetActivity    Following activity to start.
+     * @return                  Set up intent.
+     */
+    private Intent setUpNextIntent(Class targetActivity) {
+        Intent intent = new Intent(this, targetActivity);
+        intent.putExtra(Nanuda.EXTRA_GROUP, group);
+        intent.putParcelableArrayListExtra(Nanuda.EXTRA_EXPENSES, expenses);
+        return intent;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == MAKE_EXPENSE_REQUEST_CODE
+                || requestCode == EDIT_EXPENSE_REQUEST_CODE
+                || requestCode == BALANCES_REQUEST_CODE) {
+            switch (resultCode) {
+                case RESULT_OK:
+                    group = data.getParcelableExtra(Nanuda.EXTRA_GROUP);
+                    expenses = data.getParcelableArrayListExtra(Nanuda.EXTRA_EXPENSES);
+                    break;
+            }
+        }
+
+        if (requestCode == MAKE_EXPENSE_REQUEST_CODE
+                || requestCode == EDIT_EXPENSE_REQUEST_CODE) {
+            switch (resultCode) {
+                case RESULT_OK:
+                    setUpExpensesList();
+                    break;
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
