@@ -2,6 +2,7 @@ package com.example.nanuda;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,7 +20,11 @@ import java.util.ArrayList;
 
 public class MakeGroupActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 int groupId;
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog dialog;
+    private Button copyLink;
 Button save;
+Button save1;
 ArrayList<String>addArray = new ArrayList<String>();
 EditText txt;
 ListView show;
@@ -69,6 +74,21 @@ int participantNmb = 0;
             groupId= GroupsListActivity.groups.size() -1;
             GroupsListActivity.arrayAdapter.notifyDataSetChanged();
         }
+        save1 = (Button) findViewById( R.id.makeANewGroupButton );
+        save1.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog dialog = new AlertDialog.Builder( MakeGroupActivity.this ).setTitle( "Group saved !" ).setMessage( "Link" ).setNeutralButton( "Copy Link", null ).show();
+                Button createButton = dialog.getButton( AlertDialog.BUTTON_NEUTRAL );
+                createButton.setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MakeGroupActivity.this, GroupsListActivity.class);
+                        startActivity( intent );
+                    }
+                } );
+            }
+        } );
         Spinner mySpinner = findViewById( R.id.spinner1 );
         ArrayAdapter<CharSequence> myAdapter = ArrayAdapter.createFromResource( this,R.array.names, android.R.layout.simple_spinner_item );
         myAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );

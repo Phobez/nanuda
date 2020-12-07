@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class EditGroupActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     int groupId;
     Button save;
+
     ArrayList<String>addArray = new ArrayList<String>();
     EditText txt;
     ListView show;

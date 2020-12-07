@@ -66,7 +66,7 @@ public class GroupsListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected( item );
         if (item.getItemId() == R.id.make_group) {
-            Intent intent = new Intent( getApplicationContext(), MakeGroupActivity.class );
+            Intent intent = new Intent( getApplicationContext(), EditGroupActivity.class );
             startActivity( intent );
             return true;
         }
