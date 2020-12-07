@@ -13,6 +13,9 @@ import java.util.Date;
 import java.util.List;
 
 public class Nanuda extends Application {
+    public static final String EXTRA_GROUP = "com.example.nanuda.GROUP";
+    public static final String EXTRA_EXPENSES = "com.example.nanuda.EXPENSES";
+
     // Initialises Parse SDK as soon as the application is created
     @Override
     public void onCreate() {

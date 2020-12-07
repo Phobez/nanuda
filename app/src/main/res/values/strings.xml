@@ -40,7 +40,8 @@
     <string name="group_participants_placeholder">Input participant\'s name</string>
     <string name="add_participant_button_text">+</string>
     <string name="make_group_button_text">Make Group</string>
-
+    <string name="expenses_tab_text">Expenses</string>
+    <string name="balances_tab_text">Balances</string>
     <string-array name="names">
         <item>USD</item>
         <item>EUR</item>
@@ -74,4 +75,9 @@
 
 
     <string name="title_activity_expense_main_display2">ExpenseMainDisplay2</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settlement_label">Settlement</string>
+    <string name="owes_label">owes</string>
+    <string name="current_balances_label">Current Balances</string>
 </resources>
