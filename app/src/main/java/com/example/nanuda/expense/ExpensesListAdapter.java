@@ -11,28 +11,31 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nanuda.Nanuda;
 import com.example.nanuda.R;
 import com.example.nanuda.objects.Expense;
 import com.example.nanuda.objects.Group;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class ExpensesListAdapter extends RecyclerView.Adapter<ExpensesListAdapter.ExpenseViewHolder> {
 
-    List<Expense> expenses;
-    Group group;
-    //String expenseName[], paidBy[], amount[], date[];
-    Context context;
+    private ArrayList<Expense> expenses;
+    private Group group;
+    private Context context;
 
-    public ExpensesListAdapter(Context ct, List<Expense> expenses, Group group ){
+    public ExpensesListAdapter(Context ct, ArrayList<Expense> expenses, Group group) {
         context = ct;
         this.expenses = expenses;
+        this.group = group;
     }
+
     @NonNull
     @Override
     public ExpenseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view =    inflater.inflate(R.layout.expenses_list_item,parent, false);
+        View view = inflater.inflate(R.layout.expenses_list_item,parent, false);
         return new ExpenseViewHolder(view);
     }
 
@@ -40,17 +43,28 @@ public class ExpensesListAdapter extends RecyclerView.Adapter<ExpensesListAdapte
     public void onBindViewHolder(@NonNull ExpenseViewHolder holder, int position) {
         holder.expenseText.setText(expenses.get(position).getTitle());
         holder.paidByText.setText(expenses.get(position).getPayer());
-        // TODO: change to use getAmountAsString()
-        holder.amountText.setText((expenses.get(position).getAmount()).toString());
-        holder.dateText.setText(expenses.get(position).getDate().toString());
+
+        StringBuilder sb = new StringBuilder(Long.toString(expenses.get(position).getAmount()));
+        sb.insert(sb.length() - 2, '.');
+        sb.append(" " + group.getCurrency().toString());
+
+        holder.amountText.setText(sb.toString());
+
+        String dateFormat = "dd-MM-yyyy";
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+        String date = simpleDateFormat.format(expenses.get(position).getDate());
+
+        holder.dateText.setText(date);
 
         holder.expenseListLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, EditExpenseActivity.class);
-                intent.putExtra("com.example.nanuda.GROUP", group);
-                intent.putExtra("com.example.nanuda.EXPENSE", expenses.get(position));
-                ((ExpensesListActivity)context).startActivityForResult(intent, 1);
+                intent.putExtra(Nanuda.EXTRA_GROUP, group);
+                intent.putExtra(Nanuda.EXTRA_EXPENSES, expenses);
+                intent.putExtra(Nanuda.EXTRA_EXPENSE_INDEX, position);
+                ((ExpensesListActivity)context).startActivityForResult(intent, ExpensesListActivity.EDIT_EXPENSE_REQUEST_CODE);
             }
         });
 

@@ -15,6 +15,7 @@ import java.util.List;
 public class Nanuda extends Application {
     public static final String EXTRA_GROUP = "com.example.nanuda.GROUP";
     public static final String EXTRA_EXPENSES = "com.example.nanuda.EXPENSES";
+    public static final String EXTRA_EXPENSE_INDEX = "com.example.nanuda.EXPENSE_INDEX";
 
     // Initialises Parse SDK as soon as the application is created
     @Override
