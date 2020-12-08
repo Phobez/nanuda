@@ -9,12 +9,12 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:padding="12dp"
+        android:paddingStart="12dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="8dp"
         android:text="@string/settlement_label"
         android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:paddingTop="12dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:paddingBottom="8dp" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
 </LinearLayout>
