@@ -18,7 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingEnd="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -189,12 +190,12 @@
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="wrap_content"
+                android:layout_width="165dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:drawable="@color/green"
-                android:gravity="bottom"
+                android:gravity="center"
                 android:onClick="updateExpense"
                 android:shadowColor="@color/green"
                 android:text="@string/save_changes_button_text"
@@ -211,15 +212,16 @@
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="wrap_content"
+                android:layout_width="165dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
 
                 android:layout_centerHorizontal="true"
-                android:drawable="@color/button_background_color"
+                android:gravity="center"
                 android:onClick="deleteExpense"
                 android:text="@string/delete_expense_button_text"
-                android:textColor="@color/red" />
+                android:textColor="@color/white"
+                android:theme="@style/Style.Nanuda.DeleteButton" />
 
             <Space
                 android:layout_width="match_parent"

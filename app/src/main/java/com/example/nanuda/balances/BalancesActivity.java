@@ -172,17 +172,17 @@ public class BalancesActivity extends AppCompatActivity {
         for (int i = 0; i < posSummariesSize; i++) {
             long currSum = posSummaries.get(i).getParticipantSum();
             String currOweeName = posSummaries.get(i).getParticipantName();
-
-            if (negSummariesRemains <= 0) {
+            
+            if (negSummariesRemains >= 0) {
                 negSummariesRemains = negSummaries.get(negSummariesIndexer).getParticipantSum();
                 currOwerName = negSummaries.get(negSummariesIndexer).getParticipantName();
             }
 
             while (currSum > 0) {
-                if (currSum - negSummariesRemains <= 0) {
+                if (currSum + negSummariesRemains <= 0) {
                     negSummariesRemains += currSum;
-                    currSum = 0;
                     detailsList.add(new DetailsListObject(currOwerName, currOweeName, Math.abs(currSum), group.getCurrency()));
+                    currSum = 0;
                 } else {
                     currSum += negSummariesRemains;
                     detailsList.add(new DetailsListObject(currOwerName, currOweeName, Math.abs(negSummariesRemains), group.getCurrency()));

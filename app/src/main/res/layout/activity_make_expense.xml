@@ -18,7 +18,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingEnd="16dp">
 
             <TextView
                 android:id="@+id/name_text"
@@ -38,17 +39,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:hint="Input Expense Name"
                 android:inputType="textPersonName"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:hint="Input Expense Name" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingEnd="16dp">
 
             <TextView
                 android:id="@+id/amount_text"
@@ -87,7 +89,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingEnd="16dp" >
 
             <TextView
                 android:id="@+id/date_text"
@@ -117,7 +120,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingEnd="16dp" >
 
             <TextView
                 android:id="@+id/whopaid_text"
@@ -147,7 +151,8 @@
             android:layout_width="match_parent"
             android:layout_height="298dp"
             android:isScrollContainer="true"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingEnd="16dp" >
 
             <TextView
                 android:id="@+id/paidfor_text"

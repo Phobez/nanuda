@@ -24,4 +24,13 @@
     <style name="SplashScreenTheme" parent = "Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen_background</item>
     </style>
+    <style name="Style.Nanuda.DeleteButton" parent="Widget.AppCompat.Button.Borderless">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/red</item>
+        <item name="colorOnPrimary">@color/red</item>
+        <item name="colorPrimaryVariant">@color/red</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondaryVariant">@color/red</item>
+        <item name="colorOnSecondary">@color/red</item>
+    </style>
 </resources>
