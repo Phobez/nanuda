@@ -22,6 +22,7 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ExpensesListActivity extends AppCompatActivity {
@@ -33,6 +34,7 @@ public class ExpensesListActivity extends AppCompatActivity {
     private Group group = null;
     private ArrayList<Expense> expenses = null;
     private RecyclerView recyclerView;
+    private ExpensesListAdapter expensesListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +97,7 @@ public class ExpensesListActivity extends AppCompatActivity {
             public void done(List<Expense> expensesList, ParseException e) {
                 if (e == null) {
                     expenses = (ArrayList<Expense>) expensesList;
+                    Collections.sort(expenses, Collections.reverseOrder());
                     setUpRecyclerView();
                 } else {
                     Log.d("Expenses List", "Error: " + e.getMessage());
@@ -110,8 +113,8 @@ public class ExpensesListActivity extends AppCompatActivity {
         // set up recycler view
         recyclerView = findViewById(R.id.expenses_recycler);
 
-        ExpensesListAdapter expenseAdapter = new ExpensesListAdapter( this, expenses, group);
-        recyclerView.setAdapter(expenseAdapter);
+        expensesListAdapter = new ExpensesListAdapter( this, expenses, group);
+        recyclerView.setAdapter(expensesListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
@@ -171,6 +174,7 @@ public class ExpensesListActivity extends AppCompatActivity {
             switch (resultCode) {
                 case RESULT_OK:
                     setUpExpensesList();
+                    expensesListAdapter.notifyDataSetChanged();
                     break;
             }
         }

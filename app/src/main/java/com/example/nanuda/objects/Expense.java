@@ -10,7 +10,7 @@ import java.util.List;
  * Class defining the Expense Parse Object.
  */
 @ParseClassName("Expense")
-public class Expense extends ParseObject {
+public class Expense extends ParseObject implements Comparable<Expense> {
     // KEYS
     public static final String KEY_TITLE = "title";
     public static final String KEY_AMOUNT = "amount";
@@ -43,6 +43,11 @@ public class Expense extends ParseObject {
         setPayees(payees);
         setOwedAmounts(owedAmounts);
         setGroup(group);
+    }
+
+    @Override
+    public int compareTo(Expense o) {
+        return getDate().compareTo(o.getDate());
     }
 
     // GETTER SETTERS

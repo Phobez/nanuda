@@ -7,6 +7,7 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -37,6 +38,7 @@ public class MakeExpenseActivity extends AppCompatActivity {
 
     private List<PayeeListItemHolder> payeeListItemHolders;
     private Group group;
+    private ArrayList<Expense> expenses;
 
     private int checkedCheckBoxes = 0;
     private int manuallySetCheckedCheckedBoxes = 0;
@@ -62,6 +64,7 @@ public class MakeExpenseActivity extends AppCompatActivity {
     private void setUpActivity(Intent intent) {
         // get group data
         group = intent.getParcelableExtra(Nanuda.EXTRA_GROUP);
+        expenses = intent.getParcelableArrayListExtra(Nanuda.EXTRA_EXPENSES);
 
         // sets up On Focus Change Listener on the amount input
         EditText amountEditText = (EditText) findViewById(R.id.addExpenseAmountEditText);
@@ -92,6 +95,13 @@ public class MakeExpenseActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // set up default date (today)
+        EditText dateEditText = (EditText) findViewById(R.id.addExpenseDateEditText);
+        String dateFormat = "dd/MM/yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+        String date = simpleDateFormat.format(new Date());
+        dateEditText.setText(date);
 
         // sets up the currency label
         TextView currencyTextView = (TextView) findViewById(R.id.addExpenseCurrencyLabel);
@@ -160,7 +170,7 @@ public class MakeExpenseActivity extends AppCompatActivity {
      */
     public void createNewExpense(View view) {
         EditText newExpenseNameInput = (EditText) findViewById(R.id.newExpenseName);
-        EditText newDateInput = (EditText) findViewById(R.id.newDate);
+        EditText newDateInput = (EditText) findViewById(R.id.addExpenseDateEditText);
         Spinner newWhoPaidSpinner = (Spinner) findViewById(R.id.addExpensePayerSpinner);
 
         String newExpenseName = newExpenseNameInput.getText().toString();
@@ -186,6 +196,11 @@ public class MakeExpenseActivity extends AppCompatActivity {
 
         Expense newExpense = new Expense(newExpenseName, newAmount, newDate, newWhoPaid, newPayees, newOwedAmounts, group);
         newExpense.saveInBackground();
+
+        // finish activity
+        Intent intent = setUpBackIntent();
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     /**
@@ -357,5 +372,37 @@ public class MakeExpenseActivity extends AppCompatActivity {
         public void setHasBeenSetManually(boolean hasBeenSetManually) { this.hasBeenSetManually = hasBeenSetManually;}
 
         public void setHasBeenAddedToTotal(boolean hasBeenAddedToTotal) { this.hasBeenAddedToTotal = hasBeenAddedToTotal; }
+    }
+
+    /**
+     * Sets up the intent to go back to the parent activity.
+     * @return  Set up intent.
+     */
+    private Intent setUpBackIntent() {
+        Intent intent = new Intent();
+
+        intent.putExtra(Nanuda.EXTRA_GROUP, group);
+        intent.putParcelableArrayListExtra(Nanuda.EXTRA_EXPENSES, expenses);
+
+        return intent;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = setUpBackIntent();
+            setResult(RESULT_CANCELED, intent);
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = setUpBackIntent();
+        setResult(RESULT_CANCELED, intent);
+        finish();
+        super.onBackPressed();
     }
 }
