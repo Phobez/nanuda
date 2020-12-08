@@ -23,10 +23,14 @@ public class SummaryListObject implements Comparable<SummaryListObject> {
      * @return Formatted participant sum as a string.
      */
     public String getParticipantSumAsString() {
-        StringBuilder sb = new StringBuilder(Long.toString(this.participantSum));
-        sb.insert(sb.length() - 2, '.');
-        sb.append(" " + currency.toString());
-        return sb.toString();
+        if (this.participantSum != 0) {
+            StringBuilder sb = new StringBuilder(Long.toString(this.participantSum));
+            sb.insert(sb.length() - 2, '.');
+            sb.append(" " + currency.toString());
+            return sb.toString();
+        } else {
+            return "0.00 " + currency.toString();
+        }
     }
 
     public Long getParticipantSum() { return participantSum; }

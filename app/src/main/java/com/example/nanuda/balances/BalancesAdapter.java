@@ -88,6 +88,8 @@ public class BalancesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             if (summaryList.get(pos).getParticipantSum() < 0) {
                 this.participantSum.setTextColor(ContextCompat.getColor(this.participantSum.getContext(), android.R.color.holo_red_dark));
+            } else if (summaryList.get(pos).getParticipantSum() == 0) {
+                this.participantSum.setTextColor(ContextCompat.getColor(this.participantSum.getContext(), R.color.light_grey));
             }
         }
     }
