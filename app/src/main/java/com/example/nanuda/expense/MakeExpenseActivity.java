@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -363,7 +362,6 @@ public class MakeExpenseActivity extends AppCompatActivity {
 
             DecimalFormat df = new DecimalFormat("0.00");
 
-            Log.i("TEST", "Setting Debt: " + df.format(debt));
             editText.setTag("temp");
             editText.setText(df.format(debt));
             editText.setTag(null);

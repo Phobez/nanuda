@@ -6,20 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".expense.EditExpenseActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
-
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/green"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="vertical">
 
@@ -45,11 +42,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:autofillHints="input expense name"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:text="Lunch"
-                    android:textSize="14sp"
-                    android:autofillHints="input expense name" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -78,11 +75,11 @@
                     android:ems="10"
                     android:inputType="numberDecimal"
                     android:text="15"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
 
                 <TextView
-                    android:id="@+id/addExpenseCurrencyLabel"
+                    android:id="@+id/editExpenseCurrencyLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -117,7 +114,7 @@
                     android:ems="10"
                     android:inputType="date"
                     android:text="08/10/20"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -167,66 +164,17 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <LinearLayout
+                <ScrollView
+                    android:id="@+id/editExpensePayeeListScrollView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="8dp" />
+                    android:layout_height="match_parent">
 
                     <LinearLayout
+                        android:id="@+id/editExpensePayeeListLinearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/name_checkbox1"
-                            android:layout_width="157dp"
-                            android:layout_height="36dp"
-                            android:text="participant's name"
-                            android:textColor="@color/black" />
-
-                        <TextView
-                            android:id="@+id/amount_split1"
-                            android:layout_width="141dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:paddingTop="8dp"
-                            android:paddingRight="16dp"
-                            android:text="0.00 USD"
-                            android:textAlignment="textEnd"
-                            tools:ignore="RtlCompat" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/name_checkbox2"
-                            android:layout_width="157dp"
-                            android:layout_height="36dp"
-                            android:text="participant's name"
-                            android:textColor="@color/black" />
-
-                        <TextView
-                            android:id="@+id/amount_split2"
-                            android:layout_width="141dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:paddingTop="8dp"
-                            android:paddingRight="16dp"
-                            android:text="0.00 USD"
-                            android:textAlignment="textEnd"
-                            tools:ignore="RtlCompat" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
+                        android:orientation="vertical" />
+                </ScrollView>
 
 
             </LinearLayout>
@@ -247,6 +195,7 @@
                 android:layout_centerHorizontal="true"
                 android:drawable="@color/green"
                 android:gravity="bottom"
+                android:onClick="updateExpense"
                 android:shadowColor="@color/green"
                 android:text="@string/save_changes_button_text"
                 android:textColor="@color/white" />
@@ -256,7 +205,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/white">
 
 
@@ -268,6 +217,7 @@
 
                 android:layout_centerHorizontal="true"
                 android:drawable="@color/button_background_color"
+                android:onClick="deleteExpense"
                 android:text="@string/delete_expense_button_text"
                 android:textColor="@color/red" />
 
@@ -278,6 +228,6 @@
 
 
         </RelativeLayout>
+    </LinearLayout>
 
-    </com.google.android.material.appbar.AppBarLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

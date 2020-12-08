@@ -63,7 +63,7 @@ public class ExpensesListAdapter extends RecyclerView.Adapter<ExpensesListAdapte
                 Intent intent = new Intent(context, EditExpenseActivity.class);
                 intent.putExtra(Nanuda.EXTRA_GROUP, group);
                 intent.putExtra(Nanuda.EXTRA_EXPENSES, expenses);
-                intent.putExtra(Nanuda.EXTRA_EXPENSE_INDEX, position);
+                intent.putExtra(Nanuda.EXTRA_EXPENSE, expenses.get(position));
                 ((ExpensesListActivity)context).startActivityForResult(intent, ExpensesListActivity.EDIT_EXPENSE_REQUEST_CODE);
             }
         });
