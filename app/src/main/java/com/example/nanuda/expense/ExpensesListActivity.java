@@ -3,6 +3,7 @@ package com.example.nanuda.expense;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nanuda.GroupsListActivity;
 import com.example.nanuda.Nanuda;
 import com.example.nanuda.R;
 import com.example.nanuda.balances.BalancesActivity;
@@ -134,7 +136,7 @@ public class ExpensesListActivity extends AppCompatActivity {
     private Intent setUpBackIntent(boolean toParentActivity) {
         Intent intent;
         if (toParentActivity) {
-            intent = new Intent(this, BalancesActivity.class);
+            intent = new Intent(this, GroupsListActivity.class);
         } else {
             intent = new Intent();
         }
@@ -179,5 +181,26 @@ public class ExpensesListActivity extends AppCompatActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = setUpBackIntent(true);
+            setResult(RESULT_OK, intent);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = setUpBackIntent(true);
+        setResult(RESULT_OK, intent);
+        startActivity(intent);
+        finish();
+        super.onBackPressed();
     }
 }
