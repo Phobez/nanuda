@@ -66,7 +66,11 @@ public class Expense extends ParseObject {
 
     public void setPayees(List<String> payees) { put(KEY_PAYEES, payees); }
 
-    public List<Long> getOwedAmounts() { return getList(KEY_OWED_AMOUNTS); }
+    // TODO: figure out solution to following problem
+    // owedAmounts is saved as List of Long
+    // but when retrieved from backend, it's actually a List of Integer
+    // cf. BalancesActivity.java
+    public List<Integer> getOwedAmounts() { return getList(KEY_OWED_AMOUNTS); }
 
     public void setOwedAmounts(List<Long> owedAmounts) { put(KEY_OWED_AMOUNTS, owedAmounts); }
 

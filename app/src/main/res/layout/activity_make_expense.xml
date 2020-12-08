@@ -39,10 +39,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="@string/expense_name_placeholder"
-                android:textColor="@color/light_grey"
+                android:textColor="@color/black"
                 android:textSize="14sp"
-                android:textStyle="italic" />
+                android:hint="Input Expense Name" />
 
         </LinearLayout>
 
@@ -64,16 +63,15 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/newAmount"
+                android:id="@+id/addExpenseAmountEditText"
                 android:layout_width="229dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="numberDecimal"
-                android:text="@string/amount_label"
-                android:textColor="@color/light_grey"
+                android:textColor="@color/black"
                 android:textSize="14sp"
-                android:textStyle="italic" />
+                android:hint="@string/amount_label" />
 
             <TextView
                 android:id="@+id/addExpenseCurrencyLabel"
@@ -110,10 +108,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="date"
-                android:text="10/10/20"
-                android:textColor="@color/light_grey"
-                android:textSize="14sp"
-                android:textStyle="italic" />
+                android:hint="10/10/2020"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -164,10 +161,17 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/payeeListRecyclerView"
+            <ScrollView
+                android:id="@+id/payeeListScrollView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/payeeListLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </ScrollView>
 
 
         </LinearLayout>
@@ -185,6 +189,7 @@
                 android:layout_centerInParent="true"
                 android:background="@color/green"
                 android:gravity="center"
+                android:onClick="createNewExpense"
                 android:shadowColor="@color/green"
                 android:text="@string/create_expense_button_text"
                 android:textColor="@color/white" />

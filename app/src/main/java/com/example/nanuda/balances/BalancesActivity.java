@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nanuda.Nanuda;
 import com.example.nanuda.R;
-import com.example.nanuda.SplashScreenActivity;
+import com.example.nanuda.expense.ExpensesListActivity;
 import com.example.nanuda.objects.DetailsListObject;
 import com.example.nanuda.objects.Expense;
 import com.example.nanuda.objects.Group;
@@ -122,7 +122,11 @@ public class BalancesActivity extends AppCompatActivity {
             summaries.put(currPayer, newSum);
 
             List<String> currPayees = currExpense.getPayees();
-            List<Long> currOwedAmounts = currExpense.getOwedAmounts();
+            // TODO: figure out solution to following problem
+            // owedAmounts is saved as List of Long
+            // but when retrieved from backend, it's actually a List of Integer
+            // cf. Expense.java
+            List<Integer> currOwedAmounts = currExpense.getOwedAmounts();
             int currPayeesSize = currPayees.size();
 
             for (int j = 0; j < currPayeesSize; j++) {
@@ -207,8 +211,7 @@ public class BalancesActivity extends AppCompatActivity {
     private Intent setUpBackIntent(boolean toParentActivity) {
         Intent intent;
         if (toParentActivity) {
-            // TODO: replace SplashScreenActivity.class with ExpensesListActivity.class
-            intent = new Intent(this, SplashScreenActivity.class);
+            intent = new Intent(this, ExpensesListActivity.class);
         } else {
             intent = new Intent();
         }
