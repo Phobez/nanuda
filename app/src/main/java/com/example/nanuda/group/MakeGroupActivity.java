@@ -69,11 +69,11 @@ int participantNmb = 0;
         Intent intent = getIntent();
         groupId= intent.getIntExtra("groupId", -1);
         if(groupId != -1 ){
-            groupName.setText(GroupsListActivity.groups.get(groupId));
+            groupName.setText(GroupsListActivity.groupNames.get(groupId));
         }
         else{
-            GroupsListActivity.groups.add("");
-            groupId= GroupsListActivity.groups.size() -1;
+            GroupsListActivity.groupNames.add("");
+            groupId= GroupsListActivity.groupNames.size() -1;
             GroupsListActivity.arrayAdapter.notifyDataSetChanged();
         }
         save1 = (Button) findViewById( R.id.makeANewGroupButton );
@@ -105,7 +105,7 @@ int participantNmb = 0;
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                GroupsListActivity.groups.set(groupId, String.valueOf( s ));
+                GroupsListActivity.groupNames.set(groupId, String.valueOf( s ));
                 GroupsListActivity.arrayAdapter.notifyDataSetChanged();
 
             }

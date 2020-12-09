@@ -21,7 +21,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nanuda.R;
 import com.example.nanuda.objects.Group;
+import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
 import java.io.BufferedReader;
@@ -38,7 +40,7 @@ public class GroupsListActivity extends AppCompatActivity {
     private static String GROUPS_FILE_PATH = "groups.txt";
     private static ArrayList<String> groupIds = new ArrayList<String>();
 
-    static ArrayList<String> groups = new ArrayList<>();
+    static ArrayList<String> groupNames = new ArrayList<>();
     static ArrayAdapter arrayAdapter;
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
@@ -101,40 +103,56 @@ public class GroupsListActivity extends AppCompatActivity {
             }
         } );
 
-        ListView listView = (ListView) findViewById( R.id.listView );
-        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, groups);
-        listView.setAdapter(arrayAdapter);
-        listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
-                Intent intent = new Intent( getApplicationContext(), MakeGroupActivity.class );
-                intent.putExtra( "groupId", i );
-                startActivity( intent );
-            }
-        } );
+        ParseQuery<Group> query = ParseQuery.getQuery("Group");
+        query.whereContainedIn(Group.KEY_OBJECT_ID, groupIds);
+        query.findInBackground(new FindCallback<Group>() {
+            public void done(List<Group> groupsList, ParseException e) {
+                if (e == null) {
+                    int groupsListSize = groupsList.size();
 
-        listView.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long l) {
+                    for (int i = 0; i < groupsListSize; i++) {
+                        groupNames.add(groupsList.get(i).getName());
 
-                int itemToDelete = i;
-
-                new AlertDialog.Builder( GroupsListActivity.this )
-                        .setIcon( android.R.drawable.ic_dialog_alert )
-                        .setTitle( "Are you sure?" )
-                        .setMessage( "Do you want to delete this group?" )
-                        .setPositiveButton( "Yes", new DialogInterface.OnClickListener() {
+                        ListView listView = (ListView) findViewById( R.id.listView );
+                        arrayAdapter = new ArrayAdapter(GroupsListActivity.this, android.R.layout.simple_list_item_1, groupNames);
+                        listView.setAdapter(arrayAdapter);
+                        listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                groups.remove( itemToDelete );
-                                arrayAdapter.notifyDataSetChanged();
+                            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                                Intent intent = new Intent( getApplicationContext(), MakeGroupActivity.class );
+                                intent.putExtra( "groupId", i );
+                                startActivity( intent );
                             }
-                        } )
-                        .setNegativeButton( "No", null )
-                        .show();
-                return true;
+                        } );
+
+                        listView.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
+                            @Override
+                            public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long l) {
+
+                                int itemToDelete = i;
+
+                                new AlertDialog.Builder( GroupsListActivity.this )
+                                        .setIcon( android.R.drawable.ic_dialog_alert )
+                                        .setTitle( "Are you sure?" )
+                                        .setMessage( "Do you want to delete this group?" )
+                                        .setPositiveButton( "Yes", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                groupNames.remove( itemToDelete );
+                                                arrayAdapter.notifyDataSetChanged();
+                                            }
+                                        } )
+                                        .setNegativeButton( "No", null )
+                                        .show();
+                                return true;
+                            }
+                        } );
+                    }
+                } else {
+                    Log.d("Expenses List", "Error: " + e.getMessage());
+                }
             }
-        } );
+        });
     }
 
     public void joinGroupDialog(){
