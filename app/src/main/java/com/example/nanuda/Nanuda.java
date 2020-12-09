@@ -7,12 +7,11 @@ import com.example.nanuda.objects.Group;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 public class Nanuda extends Application {
+    public static final String EXTRA_GROUP = "com.example.nanuda.GROUP";
+    public static final String EXTRA_EXPENSES = "com.example.nanuda.EXPENSES";
+    public static final String EXTRA_EXPENSE = "com.example.nanuda.EXPENSE";
+
     // Initialises Parse SDK as soon as the application is created
     @Override
     public void onCreate() {

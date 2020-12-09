@@ -10,7 +10,7 @@ import java.util.List;
  * Class defining the Expense Parse Object.
  */
 @ParseClassName("Expense")
-public class Expense extends ParseObject {
+public class Expense extends ParseObject implements Comparable<Expense> {
     // KEYS
     public static final String KEY_TITLE = "title";
     public static final String KEY_AMOUNT = "amount";
@@ -45,6 +45,11 @@ public class Expense extends ParseObject {
         setGroup(group);
     }
 
+    @Override
+    public int compareTo(Expense o) {
+        return getDate().compareTo(o.getDate());
+    }
+
     // GETTER SETTERS
     public String getTitle() { return getString(KEY_TITLE); }
 
@@ -66,7 +71,11 @@ public class Expense extends ParseObject {
 
     public void setPayees(List<String> payees) { put(KEY_PAYEES, payees); }
 
-    public List<Long> getOwedAmounts() { return getList(KEY_OWED_AMOUNTS); }
+    // TODO: figure out solution to following problem
+    // owedAmounts is saved as List of Long
+    // but when retrieved from backend, it's actually a List of Integer
+    // cf. BalancesActivity.java
+    public List<Integer> getOwedAmounts() { return getList(KEY_OWED_AMOUNTS); }
 
     public void setOwedAmounts(List<Long> owedAmounts) { put(KEY_OWED_AMOUNTS, owedAmounts); }
 
