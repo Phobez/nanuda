@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.nanuda.GroupsListActivity;
+import com.example.nanuda.group.GroupsListActivity;
 import com.example.nanuda.Nanuda;
 import com.example.nanuda.R;
 import com.example.nanuda.balances.BalancesActivity;

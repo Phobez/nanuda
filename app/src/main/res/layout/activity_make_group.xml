@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:foregroundTint="@color/light_grey"
     android:visibility="visible"
-    tools:context=".MakeGroupActivity">
+    tools:context=".group.MakeGroupActivity">
 
     <EditText
         android:id="@+id/groupName"

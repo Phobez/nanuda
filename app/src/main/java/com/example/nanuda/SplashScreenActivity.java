@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.nanuda.expense.ExpensesListActivity;
+import com.example.nanuda.group.GroupsListActivity;
 import com.example.nanuda.objects.Expense;
 import com.example.nanuda.objects.Group;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Activity that displays the splash screen during the app's cold start.
