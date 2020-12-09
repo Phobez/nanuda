@@ -1,7 +1,5 @@
 package com.example.nanuda.group;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,7 +17,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.nanuda.R;
+import com.example.nanuda.objects.Group;
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,11 +32,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GroupsListActivity extends AppCompatActivity {
     private static String GROUPS_FILE_PATH = "groups.txt";
     private static ArrayList<String> groupIds = new ArrayList<String>();
-
 
     static ArrayList<String> groups = new ArrayList<>();
     static ArrayAdapter arrayAdapter;
@@ -66,16 +69,16 @@ public class GroupsListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_groups_list);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_groups_list);
 
-        getSupportActionBar().setTitle( "Groups" );
-        getSupportActionBar().setDisplayHomeAsUpEnabled( true );
+        getSupportActionBar().setTitle("Groups");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // TODO: refactor logic to work with group name AND description
         setUpGroupIds();
 
-        makeJoinButton = (Button) findViewById( R.id.MakeJoin );
+        makeJoinButton = (Button) findViewById(R.id.MakeJoin);
         makeJoinButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,8 +102,8 @@ public class GroupsListActivity extends AppCompatActivity {
         } );
 
         ListView listView = (ListView) findViewById( R.id.listView );
-        arrayAdapter = new ArrayAdapter( this, android.R.layout.simple_list_item_1, groups );
-        listView.setAdapter( arrayAdapter );
+        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, groups);
+        listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
@@ -156,17 +159,32 @@ public class GroupsListActivity extends AppCompatActivity {
      */
     private void setUpGroupIds() {
         prefs = getSharedPreferences(getApplicationContext().getPackageName(), MODE_PRIVATE);
-        Boolean firstRun = false;
 
         File groupIdsFile = new File(getFilesDir() + "/" + GROUPS_FILE_PATH);
         if (groupIdsFile.exists()) {
             groupIds = readGroupIds(this);
         } else {
             if (prefs.getBoolean("firstRun", true)) {
-                // TODO: add code to create sample group here INCLUDING in backend
-                groupIds.add("Sample Group");
+                prefs.edit().putBoolean("firstRun", false).apply();
+                List<String> sampleParticipants = new ArrayList<String>();
+                sampleParticipants.add("James");
+                sampleParticipants.add("Mary");
+                sampleParticipants.add("Robert");
+                Group sampleGroup = new Group("Sample Group", "This is a sample group.", Group.Currency.KRW, sampleParticipants);
+                sampleGroup.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            groupIds.add(sampleGroup.getObjectId());
+                            writeGroupIds(groupIds, GroupsListActivity.this);
+                        } else {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            } else {
+                writeGroupIds(groupIds, this);
             }
-            writeGroupIds(groupIds, this);
         }
     }
 

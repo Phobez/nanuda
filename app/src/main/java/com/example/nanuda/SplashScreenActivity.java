@@ -1,17 +1,11 @@
 package com.example.nanuda;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.nanuda.expense.ExpensesListActivity;
-import com.example.nanuda.group.GroupsListActivity;
-import com.example.nanuda.objects.Expense;
-import com.example.nanuda.objects.Group;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.Date;
+import com.example.nanuda.group.GroupsListActivity;
 
 /**
  * Activity that displays the splash screen during the app's cold start.
@@ -23,6 +17,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+        /*
         // DUMMY INTENT
         // TODO: remove
         Intent tempIntent = new Intent(SplashScreenActivity.this, ExpensesListActivity.class);
@@ -54,6 +49,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         tempIntent.putParcelableArrayListExtra("com.example.nanuda.EXPENSES", expenses);
 
         startActivity(tempIntent);
+        */
+
         /*
         // TEST BALANCES DATA
         // TODO: remove
@@ -99,7 +96,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         startActivityForResult(tempIntent, requestCode);
         */
 
-        startActivity(new Intent(SplashScreenActivity.this, GroupsListActivity.class));
+        startActivity(new Intent(this, GroupsListActivity.class));
         finish();
     }
 
