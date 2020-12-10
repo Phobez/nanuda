@@ -24,3 +24,5 @@ Online Documentation at Overleaf: https://www.overleaf.com/read/hdtrvngcwmzq
 PDF Documentation: https://github.com/Phobez/nanuda/blob/master/docs/documentation.pdf
 
 Demo Video: https://youtu.be/X38ObWDi01I
+
+Presentation: https://github.com/Phobez/nanuda/blob/master/docs/nanuda_ppt.pdf
