@@ -31,7 +31,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="groups_label">Groups</string>
     <string name="new_group_button_text">Make/Join New Group</string>
-    <string name="group_name_placeholder">Group Name</string>
+    <string name="group_name_placeholder">Input group name</string>
     <string name="group_name_label">Name</string>
     <string name="group_description_label">Description</string>
     <string name="group_description_placeholder">Input group description</string>

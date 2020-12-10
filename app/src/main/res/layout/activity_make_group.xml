@@ -35,7 +35,7 @@
             android:layout_weight="3"
             android:hint="@string/group_name_placeholder"
             android:inputType="textPersonName"
-            android:textColor="@color/light_grey"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -60,8 +60,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
+            android:hint="@string/group_description_placeholder"
             android:gravity="start|top"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
@@ -69,6 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
@@ -100,7 +103,7 @@
             android:id="@+id/textView6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1.6"
             android:text="@string/group_participants_label"
             android:textColor="@color/black"
             android:textStyle="bold" />
@@ -110,20 +113,21 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingEnd="10dp">
 
             <EditText
                 android:id="@+id/ParticipantInput"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/group_participants_placeholder"
                 android:inputType="textPersonName"
-                android:textColor="@color/light_grey"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <ListView
                 android:id="@+id/participantsListView"
-                android:layout_width="159dp"
+                android:layout_width="match_parent"
                 android:layout_height="156dp"
                 android:textColor="@color/light_grey"
                 android:textSize="14sp" />

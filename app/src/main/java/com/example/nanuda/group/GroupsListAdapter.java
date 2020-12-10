@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ public class GroupsListAdapter extends RecyclerView.Adapter<GroupsListAdapter.Vi
         private final TextView descTextView;
         private final LinearLayout infoLinearLayout;
         private final LinearLayout editGroupImageButtonLinearLayout;
+        private final ImageButton editGroupImageButton;
 
         public ViewHolder(View view) {
             super(view);
@@ -41,6 +43,7 @@ public class GroupsListAdapter extends RecyclerView.Adapter<GroupsListAdapter.Vi
             descTextView = (TextView) view.findViewById(R.id.groupsListItemDesc);
             infoLinearLayout = (LinearLayout) view.findViewById(R.id.groupsListItemInfoLinearLayout);
             editGroupImageButtonLinearLayout = (LinearLayout) view.findViewById(R.id.editGroupImageButtonLinearLayout);
+            editGroupImageButton = (ImageButton) view.findViewById(R.id.editGroupImageButton);
         }
 
         public View getView() { return view; }
@@ -54,6 +57,8 @@ public class GroupsListAdapter extends RecyclerView.Adapter<GroupsListAdapter.Vi
         public LinearLayout getInfoLinearLayout() { return infoLinearLayout; }
 
         public LinearLayout getEditGroupImageButtonLinearLayout() { return editGroupImageButtonLinearLayout; }
+
+        public ImageButton getEditGroupImageButton() { return editGroupImageButton; }
     }
 
     public GroupsListAdapter(Context context, List<Group> groupsList) {
@@ -87,6 +92,15 @@ public class GroupsListAdapter extends RecyclerView.Adapter<GroupsListAdapter.Vi
         });
 
         viewHolder.getEditGroupImageButtonLinearLayout().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, EditGroupActivity.class);
+                intent.putExtra(Nanuda.EXTRA_GROUP, groupsList.get(position));
+                ((GroupsListActivity)context).startActivityForResult(intent, GroupsListActivity.EDIT_GROUP_REQUEST_CODE);
+            }
+        });
+
+        viewHolder.getEditGroupImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, EditGroupActivity.class);

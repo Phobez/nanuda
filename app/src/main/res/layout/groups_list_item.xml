@@ -48,9 +48,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:gravity="center|center_horizontal|center_vertical"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
             android:orientation="horizontal"
             android:paddingStart="16dp"
+            android:paddingTop="8dp"
             android:paddingEnd="16dp">
 
             <ImageButton
