@@ -2,6 +2,6 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:opacity="opaque">
     <!-- TODO: change colour to Nanuda green -->
-    <item android:drawable="@android:color/holo_purple" />
+    <item android:drawable="@color/green" />
     <!-- TODO: add Nanuda logo here -->
 </layer-list>
