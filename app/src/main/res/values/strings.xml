@@ -78,4 +78,5 @@
     <string name="settlement_label">Settlement</string>
     <string name="owes_label">should pay</string>
     <string name="current_balances_label">Current Balances</string>
+    <string name="add_group_button">+ Make / Join New Group</string>
 </resources>

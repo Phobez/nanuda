@@ -2,7 +2,6 @@ package com.example.nanuda.group;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,13 +10,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nanuda.R;
 import com.example.nanuda.objects.Group;
@@ -37,6 +36,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GroupsListActivity extends AppCompatActivity {
+    public static final int EXPENSE_REQUEST_CODE = 100;
+
     private static String GROUPS_FILE_PATH = "groups.txt";
     private static ArrayList<String> groupIds = new ArrayList<String>();
 
@@ -113,6 +114,7 @@ public class GroupsListActivity extends AppCompatActivity {
                     for (int i = 0; i < groupsListSize; i++) {
                         groupNames.add(groupsList.get(i).getName());
 
+                        /*
                         ListView listView = (ListView) findViewById( R.id.listView );
                         arrayAdapter = new ArrayAdapter(GroupsListActivity.this, android.R.layout.simple_list_item_1, groupNames);
                         listView.setAdapter(arrayAdapter);
@@ -147,12 +149,28 @@ public class GroupsListActivity extends AppCompatActivity {
                                 return true;
                             }
                         } );
+
+                         */
                     }
+
+                    setUpRecyclerView(groupsList);
                 } else {
                     Log.d("Expenses List", "Error: " + e.getMessage());
                 }
             }
         });
+    }
+
+    /**
+     * Sets up the groups list recycler view.
+     */
+    private void setUpRecyclerView(List<Group> groups) {
+        // set up recycler view
+        RecyclerView recyclerView = findViewById(R.id.groupsListRecyclerView);
+
+        GroupsListAdapter groupsListAdapter = new GroupsListAdapter(this, groups);
+        recyclerView.setAdapter(groupsListAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public void joinGroupDialog(){
