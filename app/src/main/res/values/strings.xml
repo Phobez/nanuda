@@ -79,7 +79,7 @@
     <string name="owes_label">should pay</string>
     <string name="current_balances_label">Current Balances</string>
     <string name="add_group_button">+ Make / Join New Group</string>
-    <string name="groupIdLabel">Link</string>
+    <string name="groupIdLabel">Group ID</string>
     <string name="copy_id_button">Copy ID</string>
     <string name="save_changes_button">SAVE CHANGES</string>
     <string name="delete_group_button">Delete Group</string>

@@ -30,7 +30,12 @@ public class DetailsListObject {
      */
     public String getOwedAmountAsString() {
         StringBuilder sb = new StringBuilder(Long.toString(this.owedAmount));
-        sb.insert(sb.length() - 2, '.');
+        if (sb.length() > 2) {
+            sb.insert(sb.length() - 2, '.');
+        } else {
+            sb.insert(0, "0.");
+        }
+
         sb.append(" " + currency.toString());
         return sb.toString();
     }

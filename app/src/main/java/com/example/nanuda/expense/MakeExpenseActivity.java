@@ -77,9 +77,9 @@ public class MakeExpenseActivity extends AppCompatActivity {
                         // process input
                         StringBuilder sb = new StringBuilder(amountEditText.getText());
 
-                        int dotIndex = sb.length() - 3;
+                        int dotIndex = sb.indexOf(".");
 
-                        if (sb.charAt(dotIndex) == '.') {
+                        if (dotIndex > -1) {
                             sb.deleteCharAt(dotIndex);
                         } else {
                             sb.append("00");
@@ -194,7 +194,12 @@ public class MakeExpenseActivity extends AppCompatActivity {
         }
 
         Expense newExpense = new Expense(newExpenseName, newAmount, newDate, newWhoPaid, newPayees, newOwedAmounts, group);
-        newExpense.saveInBackground();
+
+        try {
+            newExpense.save();
+        } catch (com.parse.ParseException e) {
+            e.printStackTrace();
+        }
 
         // finish activity
         Intent intent = setUpBackIntent();

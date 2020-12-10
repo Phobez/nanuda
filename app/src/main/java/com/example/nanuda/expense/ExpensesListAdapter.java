@@ -45,7 +45,11 @@ public class ExpensesListAdapter extends RecyclerView.Adapter<ExpensesListAdapte
         holder.paidByText.setText(expenses.get(position).getPayer());
 
         StringBuilder sb = new StringBuilder(Long.toString(expenses.get(position).getAmount()));
-        sb.insert(sb.length() - 2, '.');
+        if (sb.length() > 2) {
+            sb.insert(sb.length() - 2, '.');
+        } else {
+            sb.insert(0, "0.");
+        }
         sb.append(" " + group.getCurrency().toString());
 
         holder.amountText.setText(sb.toString());
