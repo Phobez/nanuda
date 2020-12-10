@@ -2,10 +2,10 @@ package com.example.nanuda.group;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,14 +37,16 @@ import java.util.List;
 public class GroupsListActivity extends AppCompatActivity {
     public static final int EXPENSE_REQUEST_CODE = 100;
 
-    private static String GROUPS_FILE_PATH = "groups.txt";
+    private static final String GROUPS_FILE_PATH = "groups.txt";
     private static ArrayList<String> groupIds = new ArrayList<String>();
+    private List<Group> groupsList = new ArrayList<Group>();
+    private GroupsListAdapter groupsListAdapter;
 
     static ArrayList<String> groupNames = new ArrayList<>();
     public static ArrayAdapter<String> arrayAdapter;
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
-    private Button makeJoinButton;
+    private Button addGroupButton;
     private EditText link;
     private Button joinButtonPopup;
 
@@ -52,20 +54,22 @@ public class GroupsListActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate( R.menu.join_group_menu, menu );
+        // MenuInflater menuInflater = getMenuInflater();
+        // menuInflater.inflate(R.menu.join_group_menu, menu);
 
-        return super.onCreateOptionsMenu( menu );
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected( item );
+        super.onOptionsItemSelected(item);
+        /*
         if (item.getItemId() == R.id.make_group) {
             Intent intent = new Intent( getApplicationContext(), EditGroupActivity.class );
             startActivity( intent );
             return true;
         }
+        */
         return false;
     }
 
@@ -79,46 +83,47 @@ public class GroupsListActivity extends AppCompatActivity {
 
         setUpGroupIds();
 
-        makeJoinButton = (Button) findViewById(R.id.MakeJoin);
-        makeJoinButton.setOnClickListener( new View.OnClickListener() {
+        setUpGroupsList();
+
+        addGroupButton = (Button) findViewById(R.id.addGroupButton);
+        addGroupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog dialog = new AlertDialog.Builder( GroupsListActivity.this ).setMessage( "What do want to do ?" ).setPositiveButton( "Create group", null ).setNegativeButton( "Join group", null ).show();
-                Button createButton = dialog.getButton( AlertDialog.BUTTON_POSITIVE );
-                createButton.setOnClickListener( new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(GroupsListActivity.this, MakeGroupActivity.class);
-                        startActivity( intent );
-                    }
-                } );
-                Button joinButton = dialog.getButton( AlertDialog.BUTTON_NEGATIVE );
-                joinButton.setOnClickListener( new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        joinGroupDialog();
-                    }
-                } );
-            }
-        } );
-
-        ParseQuery<Group> query = ParseQuery.getQuery("Group");
-        query.whereContainedIn(Group.KEY_OBJECT_ID, groupIds);
-        query.findInBackground(new FindCallback<Group>() {
-            public void done(List<Group> groupsList, ParseException e) {
-                if (e == null) {
-                    int groupsListSize = groupsList.size();
-
-                    for (int i = 0; i < groupsListSize; i++) {
-                        groupNames.add(groupsList.get(i).getName());
-                    }
-
-                    setUpRecyclerView(groupsList);
-                } else {
-                    Log.d("Groups List", "Error: " + e.getMessage());
-                }
+                AddGroupDialog addGroupDialog = new AddGroupDialog(GroupsListActivity.this);
+                addGroupDialog.show();
             }
         });
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.join_group_menu, menu);
+    }
+
+    private void setUpGroupsList() {
+        if (groupIds.size() > 0) {
+            ParseQuery<Group> query = ParseQuery.getQuery("Group");
+            query.whereContainedIn(Group.KEY_OBJECT_ID, groupIds);
+            query.findInBackground(new FindCallback<Group>() {
+                public void done(List<Group> groupsList, ParseException e) {
+                    if (e == null) {
+                        GroupsListActivity.this.groupsList = groupsList;
+                        int groupsListSize = GroupsListActivity.this.groupsList.size();
+
+                        for (int i = 0; i < groupsListSize; i++) {
+                            groupNames.add(groupsList.get(i).getName());
+                        }
+                    } else {
+                        Log.d("Groups List", "Error: " + e.getMessage());
+                    }
+                    setUpRecyclerView(GroupsListActivity.this.groupsList);
+                }
+            });
+        } else {
+            setUpRecyclerView(GroupsListActivity.this.groupsList);
+        }
     }
 
     /**
@@ -128,26 +133,10 @@ public class GroupsListActivity extends AppCompatActivity {
         // set up recycler view
         RecyclerView recyclerView = findViewById(R.id.groupsListRecyclerView);
 
-        GroupsListAdapter groupsListAdapter = new GroupsListAdapter(this, groups);
+        groupsListAdapter = new GroupsListAdapter(this, groups);
+        Log.i("Groups List", "Adapter initialised!");
         recyclerView.setAdapter(groupsListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    public void joinGroupDialog(){
-        dialogBuilder = new AlertDialog.Builder( this );
-        final View joinPopupView = getLayoutInflater().inflate( R.layout.join_popup, null );
-        link = (EditText)joinPopupView.findViewById( R.id.linkInputPopup );
-        joinButtonPopup = (Button) joinPopupView.findViewById( R.id.joinGroupButtonPopup );
-        dialogBuilder.setView( joinPopupView );
-        dialog = dialogBuilder.create();
-        dialog.show();
-
-        joinButtonPopup.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss( );
-            }
-        } );
     }
 
     /**
@@ -245,8 +234,19 @@ public class GroupsListActivity extends AppCompatActivity {
         return groupIds;
     }
 
+    public static void addGroupId(String groupId, Context context) {
+        groupIds.add(groupId);
+        writeGroupIds(groupIds, context);
+    }
+
     public static void removeGroupId(String groupId, Context context) {
         groupIds.remove(groupIds.indexOf(groupId));
         writeGroupIds(groupIds, context);
+    }
+
+    public void updateGroupsList(Group newGroup) {
+        groupsList.add(newGroup);
+        addGroupId(newGroup.getObjectId(), this);
+        groupsListAdapter.notifyDataSetChanged();
     }
 }
