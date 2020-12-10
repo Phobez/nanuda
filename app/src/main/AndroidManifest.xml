@@ -30,7 +30,8 @@
         </activity>
         <activity
             android:name=".group.MakeGroupActivity"
-            android:parentActivityName=".group.GroupsListActivity" />
+            android:parentActivityName=".group.GroupsListActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".group.GroupsListActivity" />
         <activity android:name=".balances.BalancesActivity" android:parentActivityName=".SplashScreenActivity" />
     </application>

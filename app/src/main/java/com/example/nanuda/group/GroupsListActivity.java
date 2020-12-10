@@ -2,18 +2,18 @@ package com.example.nanuda.group;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,33 +55,11 @@ public class GroupsListActivity extends AppCompatActivity {
     private SharedPreferences prefs = null;
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // MenuInflater menuInflater = getMenuInflater();
-        // menuInflater.inflate(R.menu.join_group_menu, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-        /*
-        if (item.getItemId() == R.id.make_group) {
-            Intent intent = new Intent( getApplicationContext(), EditGroupActivity.class );
-            startActivity( intent );
-            return true;
-        }
-        */
-        return false;
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groups_list);
 
         getSupportActionBar().setTitle("Groups");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setUpGroupIds();
 
@@ -173,6 +151,7 @@ public class GroupsListActivity extends AppCompatActivity {
 
     /**
      * Write group IDs to the groups.txt file.
+     *
      * @param groupIds Group IDs as a list of strings.
      * @param context
      */
@@ -207,6 +186,7 @@ public class GroupsListActivity extends AppCompatActivity {
 
     /**
      * Reads group IDs from the groups.txt file.
+     *
      * @param context
      * @return Group IDs as a list of strings.
      */
@@ -250,5 +230,18 @@ public class GroupsListActivity extends AppCompatActivity {
         groupsList.add(newGroup);
         addGroupId(newGroup.getObjectId(), this);
         groupsListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == MAKE_GROUP_REQUEST_CODE
+                || requestCode == EDIT_GROUP_REQUEST_CODE) {
+            switch (resultCode) {
+                case RESULT_OK:
+                    setUpGroupsList();
+                    break;
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

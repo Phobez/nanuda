@@ -13,7 +13,6 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 
 import com.example.nanuda.R;
-import com.example.nanuda.expense.MakeExpenseActivity;
 import com.example.nanuda.objects.Group;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -48,7 +47,7 @@ public class AddGroupDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.makeGroupButton:
-                Intent intent = new Intent(context, MakeExpenseActivity.class);
+                Intent intent = new Intent(context, MakeGroupActivity.class);
                 ((GroupsListActivity) context).startActivityForResult(intent, GroupsListActivity.MAKE_GROUP_REQUEST_CODE);
                 break;
             case R.id.joinGroupButton:
@@ -60,10 +59,10 @@ public class AddGroupDialog extends Dialog implements View.OnClickListener {
         dismiss();
     }
 
-    public void showJoinGroupDialog(){
+    public void showJoinGroupDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
 
-        final View joinGroupDialogView = getLayoutInflater().inflate(R.layout.join_group_dialog,null);
+        final View joinGroupDialogView = getLayoutInflater().inflate(R.layout.join_group_dialog, null);
         EditText link = (EditText) joinGroupDialogView.findViewById(R.id.groupIdEditText);
         Button joinGroupDialogButton = (Button) joinGroupDialogView.findViewById(R.id.joinGroupDialogButton);
 
@@ -71,22 +70,22 @@ public class AddGroupDialog extends Dialog implements View.OnClickListener {
         Dialog dialog = dialogBuilder.create();
         dialog.show();
 
-        joinGroupDialogButton.setOnClickListener( new View.OnClickListener() {
+        joinGroupDialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ParseQuery<Group> query = ParseQuery.getQuery("Group");
                 query.getInBackground(link.getText().toString(), new GetCallback<Group>() {
                     public void done(Group object, ParseException e) {
                         if (e == null) {
-                            ((GroupsListActivity)context).updateGroupsList(object);
+                            ((GroupsListActivity) context).updateGroupsList(object);
                         } else {
                             // something went wrong
                             e.printStackTrace();
                         }
-                        dialog.dismiss( );
+                        dialog.dismiss();
                     }
                 });
             }
-        } );
+        });
     }
 }
