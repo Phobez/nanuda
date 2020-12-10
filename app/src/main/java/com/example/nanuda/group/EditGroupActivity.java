@@ -1,9 +1,13 @@
 package com.example.nanuda.group;
 
+import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,19 +15,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.nanuda.Nanuda;
 import com.example.nanuda.R;
+import com.example.nanuda.objects.Group;
+import com.parse.ParseException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EditGroupActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     int groupId;
     Button save;
 
-    ArrayList<String> addArray = new ArrayList<String>();
+    List<String> addArray = new ArrayList<String>();
     EditText txt;
     ListView show;
     int participantNmb = 0;
@@ -31,14 +40,37 @@ public class EditGroupActivity extends AppCompatActivity implements AdapterView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit_group);
 
-        getSupportActionBar().setTitle("Edit group");
+        getSupportActionBar().setTitle("Edit Group");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        setContentView(R.layout.activity_make_group);
+        Intent intent = getIntent();
+        Group currGroup = intent.getParcelableExtra(Nanuda.EXTRA_GROUP);
+
+        EditText nameEditText = (EditText) findViewById(R.id.groupName);
+        nameEditText.setText(currGroup.getName());
+
+        EditText descEditText = (EditText) findViewById(R.id.editGroupDescEditText);
+
+        if (currGroup.getDesc() != null) {
+            descEditText.setText(currGroup.getDesc());
+        }
+
+        Spinner currencySpinner = (Spinner) findViewById(R.id.spinner1);
+        ArrayAdapter<CharSequence> currencyArrayAdapter = ArrayAdapter.createFromResource(this, R.array.currency, android.R.layout.simple_spinner_item);
+        currencyArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        currencySpinner.setAdapter(currencyArrayAdapter);
+        currencySpinner.setSelection(currencyArrayAdapter.getPosition(currGroup.getCurrency().toString()));
+
         txt = (EditText) findViewById(R.id.ParticipantInput);
         show = (ListView) findViewById(R.id.participantsListView);
         save = (Button) findViewById(R.id.addParticipantButton);
+
+        addArray = currGroup.getParticipants();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditGroupActivity.this, android.R.layout.simple_list_item_1, addArray);
+        show.setAdapter(adapter);
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,50 +83,77 @@ public class EditGroupActivity extends AppCompatActivity implements AdapterView.
                 } else if (participantNmb == 20) {
                     Toast.makeText(getBaseContext(), "Maximum participants number reached ", Toast.LENGTH_LONG).show();
                 } else {
-                    addArray.add(getInput);
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditGroupActivity.this, android.R.layout.simple_list_item_1, addArray);
-                    show.setAdapter(adapter);
-                    ((EditText) findViewById(R.id.ParticipantInput)).setText(" ");
-
+                    adapter.notifyDataSetChanged();
+                    ((EditText) findViewById(R.id.ParticipantInput)).setText("");
                 }
             }
         });
-        EditText groupName = (EditText) findViewById(R.id.groupName);
-        Intent intent = getIntent();
-        groupId = intent.getIntExtra("groupId", -1);
-        if (groupId != -1) {
-            groupName.setText(GroupsListActivity.groupNames.get(groupId));
-        } else {
-            GroupsListActivity.groupNames.add("");
-            groupId = GroupsListActivity.groupNames.size() - 1;
-            GroupsListActivity.arrayAdapter.notifyDataSetChanged();
-        }
-        Spinner mySpinner = findViewById(R.id.spinner1);
-        ArrayAdapter<CharSequence> myAdapter = ArrayAdapter.createFromResource(this, R.array.currency, android.R.layout.simple_spinner_item);
-        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mySpinner.setAdapter(myAdapter);
-        mySpinner.setOnItemSelectedListener(this);
-        groupName.addTextChangedListener(new TextWatcher() {
+
+        TextView editGroupIdTextView = (TextView) findViewById(R.id.editGroupIdTextView);
+        editGroupIdTextView.setText(currGroup.getObjectId());
+
+        Button editGroupCopyIdButton = (Button) findViewById(R.id.editGroupCopyIdButton);
+        editGroupCopyIdButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onClick(View v) {
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Group ID", currGroup.getObjectId());
+                clipboard.setPrimaryClip(clip);
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                GroupsListActivity.groupNames.set(groupId, String.valueOf(s));
-                GroupsListActivity.arrayAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+                Context context = getApplicationContext();
+                Toast.makeText(context, "Group ID copied!", Toast.LENGTH_SHORT).show();
             }
         });
 
+        Button saveChangesButton = (Button) findViewById(R.id.editGroupSaveChangesButton);
+        saveChangesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = nameEditText.getText().toString();
+                String desc = descEditText.getText().toString();
+                Group.Currency currency = Group.Currency.valueOf(currencySpinner.getSelectedItem().toString());
+                List<String> participants = addArray;
 
+                currGroup.setName(name);
+                currGroup.setDesc(desc);
+                currGroup.setCurrency(currency);
+                currGroup.setParticipants(participants);
+
+                try {
+                    currGroup.save();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
+
+        Button deleteButton = (Button) findViewById(R.id.editGroupDeleteButton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(EditGroupActivity.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Are you sure?")
+                        .setMessage("Do you want to delete this group?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                GroupsListActivity.removeGroupId(currGroup.getObjectId(), getApplicationContext());
+                                currGroup.deleteInBackground();
+
+                                Intent intent = new Intent();
+                                setResult(RESULT_OK, intent);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
     }
 
     @Override
@@ -105,5 +164,24 @@ public class EditGroupActivity extends AppCompatActivity implements AdapterView.
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent();
+            setResult(RESULT_CANCELED, intent);
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(RESULT_CANCELED, intent);
+        finish();
+        super.onBackPressed();
     }
 }

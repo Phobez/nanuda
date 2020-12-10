@@ -102,6 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="@string/group_participants_label"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <LinearLayout
