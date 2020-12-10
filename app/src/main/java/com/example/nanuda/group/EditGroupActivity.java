@@ -83,6 +83,7 @@ public class EditGroupActivity extends AppCompatActivity implements AdapterView.
                 } else if (participantNmb == 20) {
                     Toast.makeText(getBaseContext(), "Maximum participants number reached ", Toast.LENGTH_LONG).show();
                 } else {
+                    addArray.add(getInput);
                     adapter.notifyDataSetChanged();
                     ((EditText) findViewById(R.id.ParticipantInput)).setText("");
                 }
