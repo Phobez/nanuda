@@ -16,7 +16,7 @@ either all, some, or no members of the group. Users can add
 descriptions for each expense. Users can also customise how the
 costs are split. Users can see a summary of how much they owe
 to others and how much others owe to others. The summary of
-how much users owe changes as users spend and pay
+how much users owe changes as users spend and pay.
 
-## External Links
+## Quick Links
 Online Documentation at Overleaf: https://www.overleaf.com/read/hdtrvngcwmzq
