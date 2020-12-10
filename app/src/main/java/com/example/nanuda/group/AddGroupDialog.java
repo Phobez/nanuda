@@ -3,6 +3,7 @@ package com.example.nanuda.group;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 
 import com.example.nanuda.R;
+import com.example.nanuda.expense.MakeExpenseActivity;
 import com.example.nanuda.objects.Group;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -46,6 +48,8 @@ public class AddGroupDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.makeGroupButton:
+                Intent intent = new Intent(context, MakeExpenseActivity.class);
+                ((GroupsListActivity) context).startActivityForResult(intent, GroupsListActivity.MAKE_GROUP_REQUEST_CODE);
                 break;
             case R.id.joinGroupButton:
                 showJoinGroupDialog();

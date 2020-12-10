@@ -36,6 +36,8 @@ import java.util.List;
 
 public class GroupsListActivity extends AppCompatActivity {
     public static final int EXPENSE_REQUEST_CODE = 100;
+    public static final int MAKE_GROUP_REQUEST_CODE = 101;
+    public static final int EDIT_GROUP_REQUEST_CODE = 102;
 
     private static final String GROUPS_FILE_PATH = "groups.txt";
     private static ArrayList<String> groupIds = new ArrayList<String>();

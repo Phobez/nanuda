@@ -29,6 +29,8 @@ public class GroupsListAdapter extends RecyclerView.Adapter<GroupsListAdapter.Vi
         private final LinearLayout linearLayout;
         private final TextView nameTextView;
         private final TextView descTextView;
+        private final LinearLayout infoLinearLayout;
+        private final LinearLayout editGroupImageButtonLinearLayout;
 
         public ViewHolder(View view) {
             super(view);
@@ -37,6 +39,8 @@ public class GroupsListAdapter extends RecyclerView.Adapter<GroupsListAdapter.Vi
             linearLayout = (LinearLayout) view.findViewById(R.id.groupsListItemLinearLayout);
             nameTextView = (TextView) view.findViewById(R.id.groupsListItemName);
             descTextView = (TextView) view.findViewById(R.id.groupsListItemDesc);
+            infoLinearLayout = (LinearLayout) view.findViewById(R.id.groupsListItemInfoLinearLayout);
+            editGroupImageButtonLinearLayout = (LinearLayout) view.findViewById(R.id.editGroupImageButtonLinearLayout);
         }
 
         public View getView() { return view; }
@@ -46,6 +50,10 @@ public class GroupsListAdapter extends RecyclerView.Adapter<GroupsListAdapter.Vi
         public TextView getNameTextView() { return nameTextView; }
 
         public TextView getDescTextView() { return descTextView; }
+
+        public LinearLayout getInfoLinearLayout() { return infoLinearLayout; }
+
+        public LinearLayout getEditGroupImageButtonLinearLayout() { return editGroupImageButtonLinearLayout; }
     }
 
     public GroupsListAdapter(Context context, List<Group> groupsList) {
@@ -69,7 +77,7 @@ public class GroupsListAdapter extends RecyclerView.Adapter<GroupsListAdapter.Vi
             viewHolder.getDescTextView().setText("");
         }
 
-        viewHolder.getLinearLayout().setOnClickListener(new View.OnClickListener() {
+        viewHolder.getInfoLinearLayout().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ExpensesListActivity.class);
@@ -78,8 +86,16 @@ public class GroupsListAdapter extends RecyclerView.Adapter<GroupsListAdapter.Vi
             }
         });
 
-        viewHolder.getView().setOnLongClickListener(new View.OnLongClickListener() {
+        viewHolder.getEditGroupImageButtonLinearLayout().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, EditGroupActivity.class);
+                intent.putExtra(Nanuda.EXTRA_GROUP, groupsList.get(position));
+                ((GroupsListActivity)context).startActivityForResult(intent, GroupsListActivity.EDIT_GROUP_REQUEST_CODE);
+            }
+        });
 
+        viewHolder.getInfoLinearLayout().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 new AlertDialog.Builder(context)
