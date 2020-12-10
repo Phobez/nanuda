@@ -23,7 +23,6 @@ import com.example.nanuda.objects.Group;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.parse.SaveCallback;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -42,12 +41,12 @@ public class GroupsListActivity extends AppCompatActivity {
     private static ArrayList<String> groupIds = new ArrayList<String>();
 
     static ArrayList<String> groupNames = new ArrayList<>();
-    static ArrayAdapter arrayAdapter;
+    public static ArrayAdapter<String> arrayAdapter;
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
     private Button makeJoinButton;
-    EditText link;
-    Button joinButtonPopup;
+    private EditText link;
+    private Button joinButtonPopup;
 
     private SharedPreferences prefs = null;
 
@@ -78,7 +77,6 @@ public class GroupsListActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Groups");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // TODO: refactor logic to work with group name AND description
         setUpGroupIds();
 
         makeJoinButton = (Button) findViewById(R.id.MakeJoin);
@@ -113,49 +111,11 @@ public class GroupsListActivity extends AppCompatActivity {
 
                     for (int i = 0; i < groupsListSize; i++) {
                         groupNames.add(groupsList.get(i).getName());
-
-                        /*
-                        ListView listView = (ListView) findViewById( R.id.listView );
-                        arrayAdapter = new ArrayAdapter(GroupsListActivity.this, android.R.layout.simple_list_item_1, groupNames);
-                        listView.setAdapter(arrayAdapter);
-                        listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
-                                Intent intent = new Intent( getApplicationContext(), MakeGroupActivity.class );
-                                intent.putExtra( "groupId", i );
-                                startActivity( intent );
-                            }
-                        } );
-
-                        listView.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
-                            @Override
-                            public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long l) {
-
-                                int itemToDelete = i;
-
-                                new AlertDialog.Builder( GroupsListActivity.this )
-                                        .setIcon( android.R.drawable.ic_dialog_alert )
-                                        .setTitle( "Are you sure?" )
-                                        .setMessage( "Do you want to delete this group?" )
-                                        .setPositiveButton( "Yes", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                groupNames.remove( itemToDelete );
-                                                arrayAdapter.notifyDataSetChanged();
-                                            }
-                                        } )
-                                        .setNegativeButton( "No", null )
-                                        .show();
-                                return true;
-                            }
-                        } );
-
-                         */
                     }
 
                     setUpRecyclerView(groupsList);
                 } else {
-                    Log.d("Expenses List", "Error: " + e.getMessage());
+                    Log.d("Groups List", "Error: " + e.getMessage());
                 }
             }
         });
@@ -207,17 +167,13 @@ public class GroupsListActivity extends AppCompatActivity {
                 sampleParticipants.add("Mary");
                 sampleParticipants.add("Robert");
                 Group sampleGroup = new Group("Sample Group", "This is a sample group.", Group.Currency.KRW, sampleParticipants);
-                sampleGroup.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if (e == null) {
-                            groupIds.add(sampleGroup.getObjectId());
-                            writeGroupIds(groupIds, GroupsListActivity.this);
-                        } else {
-                            e.printStackTrace();
-                        }
-                    }
-                });
+                try {
+                    sampleGroup.save();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                groupIds.add(sampleGroup.getObjectId());
+                writeGroupIds(groupIds, this);
             } else {
                 writeGroupIds(groupIds, this);
             }
@@ -229,11 +185,11 @@ public class GroupsListActivity extends AppCompatActivity {
      * @param groupIds Group IDs as a list of strings.
      * @param context
      */
-    private void writeGroupIds(ArrayList<String> groupIds, Context context) {
+    private static void writeGroupIds(ArrayList<String> groupIds, Context context) {
         FileOutputStream fos = null;
 
         try {
-            fos = openFileOutput(GROUPS_FILE_PATH, MODE_PRIVATE);
+            fos = context.openFileOutput(GROUPS_FILE_PATH, MODE_PRIVATE);
 
             StringBuilder data = new StringBuilder();
 
@@ -263,7 +219,7 @@ public class GroupsListActivity extends AppCompatActivity {
      * @param context
      * @return Group IDs as a list of strings.
      */
-    private ArrayList<String> readGroupIds(Context context) {
+    private static ArrayList<String> readGroupIds(Context context) {
         ArrayList<String> groupIds = new ArrayList<String>();
 
         try {
@@ -287,5 +243,10 @@ public class GroupsListActivity extends AppCompatActivity {
         }
 
         return groupIds;
+    }
+
+    public static void removeGroupId(String groupId, Context context) {
+        groupIds.remove(groupIds.indexOf(groupId));
+        writeGroupIds(groupIds, context);
     }
 }

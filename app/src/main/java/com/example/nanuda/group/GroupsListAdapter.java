@@ -1,6 +1,8 @@
 package com.example.nanuda.group;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ public class GroupsListAdapter extends RecyclerView.Adapter<GroupsListAdapter.Vi
     private final Context context;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        private View view;
         private final LinearLayout linearLayout;
         private final TextView nameTextView;
         private final TextView descTextView;
@@ -30,10 +33,13 @@ public class GroupsListAdapter extends RecyclerView.Adapter<GroupsListAdapter.Vi
         public ViewHolder(View view) {
             super(view);
 
+            this.view = view;
             linearLayout = (LinearLayout) view.findViewById(R.id.groupsListItemLinearLayout);
             nameTextView = (TextView) view.findViewById(R.id.groupsListItemName);
             descTextView = (TextView) view.findViewById(R.id.groupsListItemDesc);
         }
+
+        public View getView() { return view; }
 
         public LinearLayout getLinearLayout() { return linearLayout; }
 
@@ -69,6 +75,31 @@ public class GroupsListAdapter extends RecyclerView.Adapter<GroupsListAdapter.Vi
                 Intent intent = new Intent(context, ExpensesListActivity.class);
                 intent.putExtra(Nanuda.EXTRA_GROUP, groupsList.get(position));
                 ((GroupsListActivity)context).startActivityForResult(intent, GroupsListActivity.EXPENSE_REQUEST_CODE);
+            }
+        });
+
+        viewHolder.getView().setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View v) {
+                new AlertDialog.Builder(context)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Are you sure?")
+                        .setMessage("Do you want to delete this group?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Group groupToDelete = groupsList.get(position);
+                                groupsList.remove(groupToDelete);
+                                GroupsListAdapter.this.notifyDataSetChanged();
+                                GroupsListActivity.removeGroupId(groupToDelete.getObjectId(), context);
+                                groupToDelete.deleteInBackground();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+
+                return true;
             }
         });
     }
