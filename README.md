@@ -20,4 +20,5 @@ how much users owe changes as users spend and pay.
 
 ## Quick Links
 Online Documentation at Overleaf: https://www.overleaf.com/read/hdtrvngcwmzq
+
 PDF Documentation: https://github.com/Phobez/nanuda/blob/master/docs/documentation.pdf
