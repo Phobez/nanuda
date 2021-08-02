@@ -1,7 +1,7 @@
 # Nanuda 나누다
-A simple, lightweight mobile application for the Android to manage, organise, and split group expenses.
+A simple, lightweight mobile application for Android to manage, organise, and split group expenses.
 
-This project is being made for the Software Engineering course at Hanyang University.
+This project was made for the Software Engineering course at Hanyang University.
 
 ## Contributors
 + Abia Putrama Herlianto (https://github.com/Phobez)
