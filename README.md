@@ -18,6 +18,8 @@ costs are split. Users can see a summary of how much they owe
 to others and how much others owe to others. The summary of
 how much users owe changes as users spend and pay.
 
+You can download the latest release from the [releases page](https://github.com/Phobez/nanuda/releases).
+
 ## Quick Links
 Online Documentation at Overleaf: https://www.overleaf.com/read/hdtrvngcwmzq
 
